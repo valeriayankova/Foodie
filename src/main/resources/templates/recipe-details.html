@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+<main>
+    <header th:replace="/fragments/commons :: nav">
+    </header>
+
+    <div class="position-relative container-fluid p-md-5">
+        <h1 class="text-center mb-3 pt-5">Details</h1>
+        <div class="recipe-info row mx-auto d-flex flex-row justify-content-center">
+            <!--             th:object="${recipeViewModel}">-->
+            <div class="recipe-info card col-sm-10 col-md-8 col-lg-8 m-1 p-0">
+
+                <div th:object="${recipeViewModel}">
+                    <div class="card-body pb-1">
+                        <h3 th:text="*{name}" class="card-title text-center m-3">
+                            Recipe name</h3>
+
+                        <div class="card-body d-flex justify-content-center">
+                            <div class="row">
+                                <a class="btn btn-warning m-1">Modify</a>
+
+                                <form method="" class="m-1">
+                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="recipe card">
+                        <!--                    th:src="*{imageUrl}"-->
+                        <img class="card-img-top" alt="Car image">
+                    </div>
+
+
+                    <div class="row d-flex justify-content-center text-center">
+                        <div class="col-xl-3 col-lg-3 mt-4 col-md-3 col-sm-3 col-3">
+                            <img src="/images/timer.png" alt="">
+                            <span th:text="*{cookingTime}">Cooking time</span>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 mt-4 col-md-3 col-sm-3 col-3">
+                            <img src="/images/portions.png" alt="">
+                            <span th:text="*{portions}">Portions</span>
+                        </div>
+
+                        <div class="col-xl-3 col-lg-3 mt-4 col-md-3 col-sm-3 col-3">
+                            <img src="/images/dinner.png" alt="">
+                            <span
+                                    th:text=
+                                            "|*{category.name().substring(0,1) +
+                                        category.name().substring(1).toLowerCase()}
+                                        meal|">
+                            Dinner meal</span>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <h4 class="text-center">Required products: </h4>
+                    <div class="d-flex justify-content-center">
+                        <ul class="p-0">
+                            <li>Product-quantity</li>
+                            <li>Product-quantity</li>
+                            <li>Product-quantity</li>
+                            <li>Product-quantity</li>
+                        </ul>
+                    </div>
+                    <hr>
+
+                    <h4 class="text-center">How to prepare?</h4>
+                    <div class="d-flex justify-content-center">
+                        <p class="text-center" th:text="*{cookingInstructions}">Lorem ipsum dolor sit
+                            amet consectetur
+                            adipisicing elit.Illum vero omnis
+                            ex!Neque odio consequuntur maiores suscipit voluptate veritatis voluptatibus excepturi
+                            nobis.Asperiores quia minus dolore commodi doloribus rem fuga!
+                            Alias repellendus voluptatum laboriosam rem sunt dolorem nemo?Sequi ipsam exercitationem
+                            quibusdam doloremque, possimus modi alias magnam placeat praesentium laboriosam pariatur,
+                            excepturi labore eius ut dolorum ab veniam nemo quae!
+                            Impedit modi doloremque dolorum tempora commodi.Laboriosam laudantium debitis sequi quasi
+                            esse eligendi numquam, qui, cum pariatur tempora fugit repudiandae, minus distinctio magnam.
+                            Deleniti mollitia itaque ad quod autem modi.</p>
+                    </div>
+
+
+                    <hr>
+
+                    <div class="text-center">
+                        <h4> Write a review for this recipe</h4>
+
+                        <form th:action="@{/recipes/details/{id}/review/add(id=${recipeViewModel.id})}"
+                              th:method="POST"
+                              th:object="${reviewBindingModel}"
+                              class="card-body p-2 text-center">
+                            <div class="d-flex justify-content-center">
+                                <select th:field="*{score}" class="form-control col-lg-3">
+                                    <option value="" selected>Add score</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="3">4</option>
+                                    <option value="3">5</option>
+                                </select>
+                            </div>
+
+                            <div class="d-flex justify-content-center m-3">
+                                <textarea th:field="*{description}" id="review-text" cols="20" rows="5"
+                                          class="form-control col-lg-4"
+                                          placeholder="Write your review here..."></textarea>
+                            </div>
+
+                            <div class="card-body d-flex justify-content-center">
+                                <div class="row">
+                                    <button class="btn btn-success text-white">Submit</button>
+                                </div>
+                            </div>
+                            <hr>
+                        </form>
+                    </div>
+
+
+                    <div class="container-fluid text-center">
+                        <h4 class="m-2"><img src="/images/review.png" alt="">Reviews</h4>
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-6 col-md-6 m-4">
+                                <div class="review-card card text-center"
+                                     th:each="r : ${reviews}"
+                                     th:object="${r}">
+                                    <h5 class="card-title">
+                                        <div><img src="person.png" alt=""></div>
+                                        <span th:text="*{username}">Username</span>
+                                    </h5>
+
+                                    <h6 th:text="|Review: *{score}|" class="mb-2 text-muted">Review: 5</h6>
+
+                                    <p th:text="*{description}">Lorem ipsum dolor sit amet consectetur adipisicing
+                                        elit.Quia
+                                        distinctio nobis
+                                        temporibus quos.Aspernatur qui deserunt exercitationem corporis, aliquid ipsum
+                                        dicta asperiores unde vero ex, dolorem illum officia impedit cupiditate.
+                                        Explicabo, a.</p>
+
+                                    <th:block sec:authorize="hasRole('ADMIN')">
+                                    <div class="card-body d-flex justify-content-center">
+                                        <div class="row">
+
+                                            <form th:action="@{/recipes/details/{recipeId}/reviews/delete/{id}
+                                            (recipeId=${recipeViewModel.id},id=${r.id})}"
+                                                  th:method="DELETE" class="m-1">
+                                                <input type="submit" class="btn btn-danger" value="Remove"/>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </th:block>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<footer th:replace="/fragments/commons :: footer">
+</footer>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

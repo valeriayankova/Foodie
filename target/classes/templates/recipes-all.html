@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<main>
+    <header th:replace="/fragments/commons :: nav">
+    </header>
+
+    <div class="position-relative p-3 p-md-5 m-md-3 mt-0 text-center">
+        <div id="main" class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 font-weight-normal">Recipes</h1>
+            <p>Find some inspiration for your next meal or share a new recipe!
+            </p>
+            <div class="col-lg-12">
+                <a th:href="@{/recipes/add}" class="btn btn-outline-info">Add a new recipe</a>
+            </div>
+
+        </div>
+
+        <div class="container-fluid">
+            <div class="row" >
+                <div class="col-lg-3 col-md-6" th:each="r : ${recipes}" th:object="${r}">
+                    <div class="recipe-card card">
+<!--                        src="/images/1.jpg"-->
+<!--                        th:src="*{imageUrl}"-->
+                        <img  class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 th:text="*{name}" class="card-title">Card title</h5>
+                            <p th:text="*{shortDescription}" class="card-text">Some quick example text to build on the card title and make up the
+                                bulk
+                                of
+                                the card's content.</p>
+                            <a th:href="@{/recipes/details/{id}(id = *{id})}" class="btn btn-outline-info">
+                                Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<div th:replace="/fragments/commons :: footer">
+</div>
+
+
+</body>
+
+</html>

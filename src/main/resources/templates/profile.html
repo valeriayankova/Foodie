@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body id="acc-details">
+
+    <main>
+        <header th:replace="/fragments/commons :: nav">
+        </header>
+
+        <div class="container-fluid p-md-5">
+
+            <div class="profile d-flex flex-row justify-content-center mt-5">
+                <div class="profile card m-5 col-12 col-sm-6 col-md-6 col-lg-5">
+                    <div class="card-body text-center" th:object="${userViewModel}">
+                        <div class="col-lg-12"><img src="account.png" alt=""></div>
+                        <h3 class="m-2">Account details</h3>
+
+                        <h4 th:text="|*{firstName} *{lastName}|" class="m-4">Name Name</h4>
+
+                        <hr>
+                        <div class="personal">
+                            <h5>Personal Details</h5>
+                            <div class="row m-4">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    Username:
+                                    <div th:text="*{username}">Admin</div>
+
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    Email:
+                                    <div th:text="*{email}">admin@admin</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="activity">
+                            <h5>Activity</h5>
+
+                            <div class="row m-4">
+                                <div class="col-lg-4">
+                                    Total added recipes:
+                                    <div th:text="*{countOfRecipes}">10</div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    Total reviewed recipes:
+                                    <div th:text="*{countOfReviews}">10</div>
+                                </div>
+
+                                <div class="col-lg-4 text-muted">
+                                    Joined on
+                                    <div th:text="*{created}">2021-03-10</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+    <div th:replace="/fragments/commons :: footer">
+        </div>
+
+
+</body>
+
+</html>

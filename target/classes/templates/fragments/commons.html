@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+</head>
+
+<body>
+
+<header th:fragment="nav">
+    <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" th:href="@{/}"><img src="/images/ramen.png" alt="Ramen noodles icon"></a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav mr-auto col-12 justify-content-end">
+                <li><a class="nav-link" th:href="@{/about}">About</a></li>
+                <th:block sec:authorize="isAuthenticated()">
+                    <li><a class="nav-link" th:href="@{/recipes/all}">Recipes</a></li>
+                    <li><a class="nav-link" th:href="@{/users/profile}">Profile</a></li>
+
+                    <li>
+                        <form th:action="@{/users/logout}" th:method="POST">
+                            <input class="nav-link" type="submit" th:value="Logout">
+                        </form>
+                    </li>
+                </th:block>
+
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li><a class="nav-link" th:href="@{/users/login}">Login</a></li>
+                    <li><a class="nav-link" th:href="@{/users/register}">Register</a>
+                    </li>
+                </th:block>
+                <li>
+                    <a sec:authorize="hasRole('ADMIN')" class="nav-link btn btn-warning text-dark" href="/admin/panel">Admin</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+    <div class="navbar-static-bottom bg-dark text-white text-center m-0 p-0" th:fragment="footer">
+        <p class="p-3 m-0">© 2021 Copyright:
+            <a class="text-light" href="/">Foodie</a>
+        </p>
+    </div>
+
+</body>
+</html>

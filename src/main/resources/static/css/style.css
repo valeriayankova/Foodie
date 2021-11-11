@@ -1,0 +1,118 @@
+
+body {
+    background: #f4f1de;
+    color: #46494c;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0;
+
+}
+
+main{
+    min-height: 100vh;
+}
+
+h1, h2, h3 {
+    letter-spacing: 3px;
+}
+
+nav{
+    opacity: 80%;
+}
+
+header {
+    background: #bcb8b1;
+    opacity: 100%;
+}
+
+::selection {
+    color: #586ba4;
+}
+
+#category-search {
+    background: #f9936b;
+}
+
+.fixed-top {
+    background: white;
+}
+
+.rounded {
+    border: #46494c 5px solid;
+}
+
+.feature-heading {
+    color: #f9936b;
+}
+
+.feature-image {
+    width: 500px;
+    height: 500px;
+}
+
+#login, #recipe-add {
+    background: white;
+}
+
+.form-control {
+    border: gray 2px solid;
+}
+
+.form-text {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.register {
+    height: 100%;
+}
+
+form, .card {
+    border-radius: 5%;
+}
+
+.register {
+    border-radius: 5% 0 0 5%;
+}
+
+.recipe-card {
+    margin-bottom: 10px;
+}
+
+.recipes {
+    width: 50%;
+    height: 70%;
+}
+
+.review-body {
+    width: 50%;
+}
+
+#acc-details {
+    background: url("/images/3.jpg");
+    height: 100%;
+}
+
+#new-recipe {
+    background: url("/images/1.jpg");
+}
+
+li > form > input {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.form-control[type=file]{
+    overflow: hidden;
+}
+
+.cover-image{
+    position: relative;
+    /*height: 600px;*/
+}
+
+
+
+
+
+

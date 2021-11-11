@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <main>
+        <header th:replace="/fragments/commons :: nav">
+        </header>
+
+
+        <div class="position-relative p-3  mt-0 text-center">
+            <div id="main" class="col-md-5 p-lg-5 mx-auto my-5">
+                <h1 class="display-4 font-weight-normal">About</h1>
+
+            </div>
+
+            <div class="row feature">
+                <div class="col-md-7">
+                    <h2 class="feature-heading">Get inspired about cooking.<span class="text-muted">Find many
+                            delicious recipes.</span></h2>
+                    <p class="lead">Foodie is a collection of mouth watering recipes that even picky eaters cannot
+                        resist to.</p>
+                </div>
+                <div class="col-md-5">
+                    <img class="feature-image img-fluid mx-auto" alt="500x500" src="/images/4.jpg" data-holder-rendered="true">
+                </div>
+            </div>
+
+            <hr class="feature-divider">
+
+            <div class="row feature mb-5">
+                <div class="col-md-7 order-md-2">
+                    <h2 class="feature-heading">Post your favourite recipes!<span class="text-muted">Share your cooking
+                            knowledge.</span></h2>
+                    <p class="lead">Create an account today and get the chance to become a part of Foodie's evergrowing
+                        community.</p>
+                </div>
+                <div class="col-md-5 order-md-1">
+                    <img class="feature-image img-fluid mx-auto" alt="500x500" src="/images/5.jpg" data-holder-rendered="true">
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <footer th:replace="/fragments/commons :: footer">
+        </footer>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

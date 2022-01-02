@@ -14,9 +14,10 @@ public class RecipeEntity extends BaseEntity {
     private CategoryEntity category;
     private Integer cookingTime;
     private Integer portions;
+    private String pictureUrl;
+    private String picturePublicId;
     private UserEntity author;
     private Set<ProductEntity> products;
-
 
     @Column(nullable = false)
     public String getName() {
@@ -61,6 +62,24 @@ public class RecipeEntity extends BaseEntity {
 
     public void setPortions(Integer portionsServed) {
         this.portions = portionsServed;
+    }
+
+    @Column
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
+    @Column
+    public String getPicturePublicId() {
+        return picturePublicId;
+    }
+
+    public void setPicturePublicId(String picturePublicId) {
+        this.picturePublicId = picturePublicId;
     }
 
     @ManyToOne

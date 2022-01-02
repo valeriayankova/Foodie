@@ -1,5 +1,6 @@
 package bg.project.foodie.service.impl;
 
+import bg.project.foodie.cloudinary.*;
 import bg.project.foodie.model.entity.ProductEntity;
 import bg.project.foodie.model.entity.RecipeEntity;
 import bg.project.foodie.model.service.RecipeServiceModel;
@@ -12,6 +13,7 @@ import bg.project.foodie.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.io.*;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
@@ -25,27 +27,36 @@ public class RecipeServiceImpl implements RecipeService {
     private final UserService userService;
     private final CategoryService categoryService;
     private final ProductRepository productRepository;
+    private final CloudinaryService cloudinaryService;
 
-    public RecipeServiceImpl(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService, ProductRepository productRepository) {
+    public RecipeServiceImpl(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService, ProductRepository productRepository, CloudinaryService cloudinaryService) {
         this.recipeRepository = recipeRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.categoryService = categoryService;
         this.productRepository = productRepository;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
-    public void addRecipe(RecipeServiceModel recipeServiceModel, Principal principal) {
+    public void addRecipe(RecipeServiceModel recipeServiceModel, Principal principal) throws IOException {
         RecipeEntity recipe = modelMapper.map(recipeServiceModel, RecipeEntity.class);
 
         Set<ProductEntity> products = recipeServiceModel.getProducts().stream()
                 .map(productBindingModel -> {
                     ProductEntity product = modelMapper.map(productBindingModel, ProductEntity.class);
                     product.setRecipe(recipe);
+                    productRepository.save(product);
 
                     return product;
                 })
                 .collect(Collectors.toSet());
+
+        if (!recipeServiceModel.getPicture().isEmpty()) {
+            CloudinaryImage upload = cloudinaryService.upload(recipeServiceModel.getPicture());
+            recipe.setPicturePublicId(upload.getPublicId());
+            recipe.setPictureUrl(upload.getUrl());
+        }
 
         recipe.setProducts(products);
         recipe.setCategory(categoryService.findByName(recipeServiceModel.getCategory()));

@@ -44,7 +44,7 @@
                     <div class="recipe-card card">
 <!--                        src="/images/1.jpg"-->
 <!--                        th:src="*{imageUrl}"-->
-                        <img  class="card-img-top" alt="">
+                        <img  class="card-img-top" alt="" th:src="*{pictureUrl}">
                         <div class="card-body">
                             <h5 th:text="*{name}" class="card-title">Card title</h5>
                             <p th:text="*{shortDescription}" class="card-text">Some quick example text to build on the card title and make up the

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.*;
 import java.security.Principal;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class RecipeController {
     public String addRecipePost(@Valid RecipeBindingModel recipeBindingModel,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
-                                Principal principal) {
+                                Principal principal) throws IOException {
 
 
         if (bindingResult.hasErrors()) {

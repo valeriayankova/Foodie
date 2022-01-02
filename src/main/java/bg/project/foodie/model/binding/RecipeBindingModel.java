@@ -1,6 +1,7 @@
 package bg.project.foodie.model.binding;
 
 import bg.project.foodie.model.entity.enums.CategoryNameEnum;
+import org.springframework.web.multipart.*;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -16,6 +17,7 @@ public class RecipeBindingModel {
     private Integer cookingTime;
     private Integer portionsServed;
     private List<ProductBindingModel> products;
+    private MultipartFile picture;
 
     @NotNull
     @Size(min = 3)
@@ -92,5 +94,13 @@ public class RecipeBindingModel {
 
     public void setProducts(List<ProductBindingModel> products) {
         this.products = products;
+    }
+
+    public MultipartFile getPicture() {
+        return picture;
+    }
+
+    public void setPicture(MultipartFile picture) {
+        this.picture = picture;
     }
 }

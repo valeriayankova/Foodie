@@ -16,6 +16,7 @@ public class RecipeViewModel {
     private Integer cookingTime;
     private Integer portions;
     private List<ProductEntity> products;
+    private String pictureUrl;
 
     public Long getId() {
         return id;
@@ -79,5 +80,13 @@ public class RecipeViewModel {
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 }

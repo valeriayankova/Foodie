@@ -2,6 +2,7 @@ package bg.project.foodie.model.service;
 
 import bg.project.foodie.model.binding.ProductBindingModel;
 import bg.project.foodie.model.entity.enums.CategoryNameEnum;
+import org.springframework.web.multipart.*;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class RecipeServiceModel {
     private Integer cookingTime;
     private Integer portions;
     private List<ProductBindingModel> products;
+    private MultipartFile picture;
 
     public Long getId() {
         return id;
@@ -87,5 +89,13 @@ public class RecipeServiceModel {
 
     public void setProducts(List<ProductBindingModel> products) {
         this.products = products;
+    }
+
+    public MultipartFile getPicture() {
+        return picture;
+    }
+
+    public void setPicture(MultipartFile picture) {
+        this.picture = picture;
     }
 }

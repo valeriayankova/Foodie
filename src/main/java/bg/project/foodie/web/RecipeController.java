@@ -1,8 +1,6 @@
 package bg.project.foodie.web;
 
-import bg.project.foodie.model.binding.ProductBindingModel;
-import bg.project.foodie.model.binding.RecipeBindingModel;
-import bg.project.foodie.model.binding.ReviewBindingModel;
+import bg.project.foodie.model.service.ProductServiceModel;
 import bg.project.foodie.model.service.RecipeServiceModel;
 import bg.project.foodie.model.service.ReviewServiceModel;
 import bg.project.foodie.model.view.RecipeViewModel;
@@ -37,8 +35,8 @@ public class RecipeController {
     }
 
     @ModelAttribute
-    public ReviewBindingModel reviewBindingModel() {
-        return new ReviewBindingModel();
+    public ReviewServiceModel reviewBindingModel() {
+        return new ReviewServiceModel();
     }
 
 
@@ -53,10 +51,10 @@ public class RecipeController {
 
     @GetMapping("/add")
     public String addRecipe(Model model) {
-        RecipeBindingModel recipeBindingModel = new RecipeBindingModel();
-        ProductBindingModel productBindingModel = new ProductBindingModel();
-        recipeBindingModel.setProducts(List.of(productBindingModel));
-        model.addAttribute("recipeBindingModel", recipeBindingModel);
+        RecipeServiceModel recipeServiceModel = new RecipeServiceModel();
+        ProductServiceModel productServiceModel = new ProductServiceModel();
+        recipeServiceModel.setProducts(List.of(productServiceModel));
+        model.addAttribute("recipeServiceModel", recipeServiceModel);
         return "recipe-add";
     }
 
@@ -72,20 +70,19 @@ public class RecipeController {
     }
 
     @PostMapping("/add")
-    public String addRecipePost(@Valid RecipeBindingModel recipeBindingModel,
+    public String addRecipePost(@Valid RecipeServiceModel recipeServiceModel,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Principal principal) throws IOException {
 
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("recipeBindingModel", recipeBindingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.recipeBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("recipeServiceModel", recipeServiceModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.recipeServiceModel", bindingResult);
 
             return "redirect:/recipes/all";
         }
 
-        RecipeServiceModel recipeServiceModel = modelMapper.map(recipeBindingModel, RecipeServiceModel.class);
         recipeService.addRecipe(recipeServiceModel, principal);
 
         return "redirect:/recipes/all";
@@ -93,19 +90,19 @@ public class RecipeController {
 
     @PostMapping("/details/{id}/review/add")
     public String addReviewPost(@PathVariable Long id,
-                                @Valid ReviewBindingModel reviewBindingModel,
+                                @Valid ReviewServiceModel reviewServiceModel,
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Principal principal) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("reviewBindingModel", reviewBindingModel)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.reviewBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("reviewServiceModel", reviewServiceModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.reviewServiceModel", bindingResult);
 
             return "redirect:/recipes/details/{id}";
         }
 
-        reviewService.addReview(id, modelMapper.map(reviewBindingModel, ReviewServiceModel.class), principal);
+        reviewService.addReview(id, reviewServiceModel, principal);
 
         return "redirect:/recipes/details/{id}";
     }
@@ -119,26 +116,25 @@ public class RecipeController {
     @GetMapping("/update/{id}")
     public String updateRecipe(@PathVariable Long id, Model model) {
         RecipeViewModel recipe = recipeService.getRecipeViewById(id);
-        RecipeBindingModel bindingModel = modelMapper.map(recipe, RecipeBindingModel.class);
-        model.addAttribute("recipe", bindingModel);
+        RecipeServiceModel recipeServiceModel = modelMapper.map(recipe, RecipeServiceModel.class);
+        model.addAttribute("recipe", recipeServiceModel);
         return "recipe-update";
     }
 
     @PatchMapping("/update/{id}")
     public String updateRecipePatch(@PathVariable Long id,
-                                    @Valid RecipeViewModel recipe,
+                                    @Valid RecipeServiceModel recipeServiceModel,
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("recipe", recipe)
+            redirectAttributes.addFlashAttribute("recipe", recipeServiceModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.recipe", bindingResult);
 
             return "redirect:update/" + id;
         }
 
-        RecipeServiceModel serviceModel = modelMapper.map(recipe, RecipeServiceModel.class);
-        serviceModel.setId(id);
-        boolean isUpdated = recipeService.updateRecipe(serviceModel);
+        recipeServiceModel.setId(id);
+        boolean isUpdated = recipeService.updateRecipe(recipeServiceModel);
 
         if (!isUpdated) {
             return "redirect:update/{id}";

@@ -1,22 +1,21 @@
 package bg.project.foodie.model.service;
 
-import bg.project.foodie.model.binding.ProductBindingModel;
 import bg.project.foodie.model.entity.enums.CategoryNameEnum;
 import org.springframework.web.multipart.*;
 
+import javax.validation.constraints.*;
 import java.util.List;
 
 public class RecipeServiceModel {
 
     private Long id;
     private String name;
-    private String imageUrl;
     private String cookingInstructions;
     private String shortDescription;
     private CategoryNameEnum category;
     private Integer cookingTime;
     private Integer portions;
-    private List<ProductBindingModel> products;
+    private List<ProductServiceModel> products;
     private MultipartFile picture;
 
     public Long getId() {
@@ -27,6 +26,8 @@ public class RecipeServiceModel {
         this.id = id;
     }
 
+    @NotNull
+    @Size(min = 3)
     public String getName() {
         return name;
     }
@@ -35,14 +36,8 @@ public class RecipeServiceModel {
         this.name = name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
+    @NotNull
+    @Size(min = 10)
     public String getCookingInstructions() {
         return cookingInstructions;
     }
@@ -51,6 +46,8 @@ public class RecipeServiceModel {
         this.cookingInstructions = cookingInstructions;
     }
 
+    @NotNull
+    @Size(max = 40)
     public String getShortDescription() {
         return shortDescription;
     }
@@ -59,6 +56,7 @@ public class RecipeServiceModel {
         this.shortDescription = shortDescription;
     }
 
+    @NotNull
     public CategoryNameEnum getCategory() {
         return category;
     }
@@ -67,6 +65,8 @@ public class RecipeServiceModel {
         this.category = category;
     }
 
+    @NotNull
+    @Positive
     public Integer getCookingTime() {
         return cookingTime;
     }
@@ -75,6 +75,8 @@ public class RecipeServiceModel {
         this.cookingTime = cookingTime;
     }
 
+    @NotNull
+    @Positive
     public Integer getPortions() {
         return portions;
     }
@@ -83,11 +85,13 @@ public class RecipeServiceModel {
         this.portions = portions;
     }
 
-    public List<ProductBindingModel> getProducts() {
+    @NotNull
+    @Size(min = 1, max = 30)
+    public List<ProductServiceModel> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductBindingModel> products) {
+    public void setProducts(List<ProductServiceModel> products) {
         this.products = products;
     }
 

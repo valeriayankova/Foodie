@@ -1,5 +1,7 @@
 package bg.project.foodie.model.service;
 
+import javax.validation.constraints.*;
+
 public class ReviewServiceModel {
     private Long id;
     private Integer score;
@@ -14,6 +16,7 @@ public class ReviewServiceModel {
         this.id = id;
     }
 
+    @NotNull
     public Integer getScore() {
         return score;
     }

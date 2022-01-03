@@ -99,7 +99,7 @@
 
                         <form th:action="@{/recipes/details/{id}/review/add(id=${recipeViewModel.id})}"
                               th:method="POST"
-                              th:object="${reviewBindingModel}"
+                              th:object="${reviewServiceModel}"
                               class="card-body p-2 text-center">
                             <div class="d-flex justify-content-center">
                                 <select th:field="*{score}" class="form-control col-lg-3">

@@ -1,10 +1,10 @@
-package bg.project.foodie.model.binding;
+package bg.project.foodie.model.service;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-public class ProductBindingModel {
+public class ProductServiceModel {
 
     private String name;
     private Double quantity;

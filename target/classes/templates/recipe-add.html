@@ -22,7 +22,7 @@
     <div class="add-recipe container py-5 mt-5 p-md-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-8 col-xl-8 m-5">
-                <form th:action="@{/recipes/add}" th:method="POST" th:object="${recipeBindingModel}" id="recipe-add"
+                <form th:action="@{/recipes/add}" th:method="POST" th:object="${recipeServiceModel}" id="recipe-add"
                       class="card-body p-5 text-center" enctype="multipart/form-data">
 
                     <h2 class="mb-3">Add a new recipe</h2>

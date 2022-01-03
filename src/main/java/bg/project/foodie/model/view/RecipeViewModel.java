@@ -1,11 +1,9 @@
 package bg.project.foodie.model.view;
 
-import bg.project.foodie.model.binding.*;
-import bg.project.foodie.model.entity.ProductEntity;
 import bg.project.foodie.model.entity.enums.CategoryNameEnum;
+import bg.project.foodie.model.service.*;
 
 import java.util.List;
-import java.util.Set;
 
 public class RecipeViewModel {
 
@@ -16,7 +14,7 @@ public class RecipeViewModel {
     private CategoryNameEnum category;
     private Integer cookingTime;
     private Integer portions;
-    private List<ProductBindingModel> products;
+    private List<ProductServiceModel> products;
     private String pictureUrl;
 
     public Long getId() {
@@ -75,11 +73,11 @@ public class RecipeViewModel {
         this.portions = portions;
     }
 
-    public List<ProductBindingModel> getProducts() {
+    public List<ProductServiceModel> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductBindingModel> products) {
+    public void setProducts(List<ProductServiceModel> products) {
         this.products = products;
     }
 

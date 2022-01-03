@@ -1,10 +1,13 @@
 package bg.project.foodie.model.service;
 
+import javax.validation.constraints.*;
+
 public class UserServiceModel {
 
     private Long id;
     private String username;
     private String password;
+    private String confirmPassword;
     private String email;
     private String firstName;
     private String lastName;
@@ -17,6 +20,8 @@ public class UserServiceModel {
         this.id = id;
     }
 
+    @NotNull
+    @Size(min = 5, max = 20)
     public String getUsername() {
         return username;
     }
@@ -25,6 +30,8 @@ public class UserServiceModel {
         this.username = username;
     }
 
+    @NotNull
+    @Size(min = 8)
     public String getPassword() {
         return password;
     }
@@ -33,6 +40,18 @@ public class UserServiceModel {
         this.password = password;
     }
 
+    @NotNull
+    @Size(min = 8)
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    @NotBlank
+    @Email
     public String getEmail() {
         return email;
     }
@@ -41,6 +60,8 @@ public class UserServiceModel {
         this.email = email;
     }
 
+    @NotNull
+    @Size(min = 2)
     public String getFirstName() {
         return firstName;
     }
@@ -49,6 +70,8 @@ public class UserServiceModel {
         this.firstName = firstName;
     }
 
+    @NotNull
+    @Size(min = 2)
     public String getLastName() {
         return lastName;
     }

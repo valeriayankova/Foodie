@@ -1,10 +1,7 @@
 package bg.project.foodie.web;
-
-import bg.project.foodie.model.binding.UserRegisterBindingModel;
 import bg.project.foodie.model.service.UserServiceModel;
 import bg.project.foodie.model.view.UserViewModel;
 import bg.project.foodie.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,16 +16,14 @@ import java.security.*;
 public class UserController {
 
     private final UserService userService;
-    private final ModelMapper modelMapper;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.modelMapper = modelMapper;
     }
 
     @ModelAttribute
-    public UserRegisterBindingModel userRegisterBindingModel() {
-        return new UserRegisterBindingModel();
+    public UserServiceModel userServiceModel() {
+        return new UserServiceModel();
     }
 
     @GetMapping("/login")
@@ -50,18 +45,17 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerPost(@Valid UserRegisterBindingModel userRegisterBindingModel,
+    public String registerPost(@Valid UserServiceModel userServiceModel,
                                BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors() ||
-                !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())){
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
+                !userServiceModel.getPassword().equals(userServiceModel.getConfirmPassword())){
+            redirectAttributes.addFlashAttribute("userRegisterService", userServiceModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
             return "redirect:register";
         }
 
-        UserServiceModel userServiceModel = modelMapper.map(userRegisterBindingModel, UserServiceModel.class);
         boolean isSuccessful = userService.registerUser(userServiceModel);
 
         if (!isSuccessful){

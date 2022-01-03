@@ -22,7 +22,6 @@
     <div class="position-relative container-fluid p-md-5">
         <h1 class="text-center mb-3 pt-5">Details</h1>
         <div class="recipe-info row mx-auto d-flex flex-row justify-content-center">
-            <!--             th:object="${recipeViewModel}">-->
             <div class="recipe-info card col-sm-10 col-md-8 col-lg-8 m-1 p-0">
 
                 <div th:object="${recipeViewModel}">
@@ -70,12 +69,9 @@
                     <hr>
 
                     <h4 class="text-center">Required products: </h4>
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center" th:each="p : *{products}">
                         <ul class="p-0">
-                            <li>Product-quantity</li>
-                            <li>Product-quantity</li>
-                            <li>Product-quantity</li>
-                            <li>Product-quantity</li>
+                            <li th:object="${p}" th:text="|*{name} - *{quantity}|">Product-quantity</li>
                         </ul>
                     </div>
                     <hr>

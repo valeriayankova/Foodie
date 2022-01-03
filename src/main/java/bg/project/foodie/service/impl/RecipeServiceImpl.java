@@ -1,6 +1,7 @@
 package bg.project.foodie.service.impl;
 
 import bg.project.foodie.cloudinary.*;
+import bg.project.foodie.model.binding.*;
 import bg.project.foodie.model.entity.*;
 import bg.project.foodie.model.service.RecipeServiceModel;
 import bg.project.foodie.model.view.RecipeViewModel;
@@ -65,7 +66,14 @@ public class RecipeServiceImpl implements RecipeService {
     public List<RecipeViewModel> getAllRecipeViewModels() {
 
         return recipeRepository.findAll().stream()
-                .map(r -> modelMapper.map(r, RecipeViewModel.class))
+                .map(r -> {
+                    RecipeViewModel view = modelMapper.map(r, RecipeViewModel.class);
+                    List<ProductBindingModel> products = r.getProducts().stream()
+                            .map(p -> modelMapper.map(p, ProductBindingModel.class))
+                            .collect(Collectors.toList());
+                    view.setProducts(products);
+                    return view;
+                })
                 .collect(Collectors.toList());
 
     }

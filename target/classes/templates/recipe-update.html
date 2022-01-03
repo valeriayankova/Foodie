@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
 <main>
@@ -90,14 +91,12 @@
 
 
                             <div class="col-lg-6 mb-3">
-                                <!--                                <label th:for="${product}.name">Name</label>-->
                                 Name
                                 <input th:field="*{products[__${iterStat.index}__].name}"
                                        id="product" class="form-control form-control-lg"/>
                             </div>
 
                             <div class="col-lg-6 mb-3">
-                                <!--                                <label th:for="${product}.quantity">Quantity(grams)</label>-->
                                 Quantity(grams)
                                 <input th:field="*{products[__${iterStat.index}__].quantity}" type="number"
                                        id="quantity" step="0.1" min="0"
@@ -127,10 +126,6 @@
 
                     <hr>
 
-                    <!--                    <label for="image" class="form-label">-->
-                    <!--&lt;!&ndash;                        <h4>Image URL</h4>&ndash;&gt;-->
-                    <!--                    </label>-->
-
                     <hr>
 
 
@@ -148,6 +143,7 @@
 
 <footer th:replace="/fragments/commons :: footer">
 </footer>
+
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

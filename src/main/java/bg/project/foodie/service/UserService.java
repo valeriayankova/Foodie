@@ -22,4 +22,6 @@ public interface UserService {
     UserViewModel findUserById(Long id);
 
     UserEntity findUserByUsername(String name);
+
+    UserViewModel getViewByUsername(String name);
 }

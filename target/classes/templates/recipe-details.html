@@ -72,9 +72,6 @@
                     <div class="d-flex justify-content-center" th:each="p : *{products}">
                         <ul class="p-0">
                             <li th:object="${p}" th:text="|*{name} - *{quantity}|">Product-quantity</li>
-<!--                            <li>Product-quantity</li>-->
-<!--                            <li>Product-quantity</li>-->
-<!--                            <li>Product-quantity</li>-->
                         </ul>
                     </div>
                     <hr>

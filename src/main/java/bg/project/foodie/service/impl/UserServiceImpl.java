@@ -129,4 +129,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(name).orElse(null);
     }
 
+    @Override
+    public UserViewModel getViewByUsername(String name) {
+        UserEntity userEntity = userRepository.findByUsername(name).orElse(null);
+
+        if (userEntity != null) {
+            return modelMapper.map(userEntity, UserViewModel.class);
+        }
+
+        return null;
+    }
+
 }

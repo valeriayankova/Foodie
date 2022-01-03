@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.*;
 
 @Controller
 @RequestMapping("/users")
@@ -40,10 +41,9 @@ public class UserController {
         return "register";
     }
 
-    @GetMapping("/profile/{id}")
-    public String profile(@PathVariable Long id, Model model) {
-
-        UserViewModel userViewModel = userService.findUserById(id);
+    @GetMapping("/profile")
+    public String profile(Principal principal, Model model) {
+        UserViewModel userViewModel = userService.getViewByUsername(principal.getName());
         model.addAttribute("userViewModel", userViewModel);
 
         return "profile";

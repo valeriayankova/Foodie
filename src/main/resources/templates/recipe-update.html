@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<main>
+    <header th:replace="/fragments/commons :: nav">
+    </header>
+
+    <div class="add-recipe container py-5 mt-5 p-md-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-8 col-xl-8 m-5">
+                <form th:object="${recipe}" th:action="@{/recipes/update/{id}(id=*{id})}" th:method="PATCH" id="recipe-add"
+                      class="card-body p-5 text-center" enctype="multipart/form-data">
+
+                    <h2 class="mb-3">Add a new recipe</h2>
+
+                    <hr>
+
+
+                    <div class="form-outline col-lg-12 mb-3">
+                        <label class="form-label" for="username">
+                            <h4>Name</h4>
+                        </label>
+                        <input th:field="*{name}" type="text" id="username" class="form-control form-control-lg"
+                               required/>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-outline col-lg-12 mb-3">
+                        <label class="form-label" for="short-descr">
+                            <h4>Short Description</h4>
+                        </label>
+                        <textarea th:field="*{shortDescription}" id="short-descr" class="form-control form-control-lg"
+                                  cols="20" rows="5" placeholder="..."
+                                  required> </textarea>
+                    </div>
+
+                    <hr>
+
+
+                    <div class="row">
+                        <div class="form-outline col-lg-6 mb-3">
+
+                            <label class="form-label" for="portions">
+                                <h5>Portions</h5>
+                            </label>
+                            <input th:field="*{portions}" type="number" id="portions" min="0"
+                                   class="form-control form-control-lg"
+                                   required/>
+
+                        </div>
+
+                        <div class="form-outline col-lg-6 mb-3">
+                            <label class="form-label" for="cook-time">
+                                <h6>Cooking time(minutes)</h6>
+                            </label>
+                            <input th:field="*{cookingTime}" type="number" id="cook-time" min="0"
+                                   class="form-control form-control-lg"
+                                   required/>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <label for="select-cat" class="form-label">
+                        <h4>Category</h4>
+                    </label>
+                    <div class="d-flex justify-content-center">
+                        <select th:field="*{category}" id="select-cat" class="form-control col-lg-12">
+                            <option value="" selected>Choose a category...</option>
+                            <option th:each="c : ${T(bg.project.foodie.model.entity.enums.CategoryNameEnum).values()}"
+                                    th:text="${c}" th:value="${c}">Lunch
+                            </option>
+                        </select>
+                    </div>
+                    <hr>
+
+                    <h4>Products</h4>
+
+                    <div class="products" th:each="product, iterStat : *{products}">
+                        <div class="product row">
+
+
+                            <div class="col-lg-6 mb-3">
+                                Name
+                                <input th:field="*{products[__${iterStat.index}__].name}"
+                                       id="product" class="form-control form-control-lg"/>
+                            </div>
+
+                            <div class="col-lg-6 mb-3">
+                                Quantity(grams)
+                                <input th:field="*{products[__${iterStat.index}__].quantity}" type="number"
+                                       id="quantity" step="0.1" min="0"
+                                       class="form-control form-control-lg"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <button type="button"
+                            class="add-product btn btn-outline-secondary col-lg-12">+ Add another
+                        product
+                    </button>
+
+                    <hr>
+
+                    <label for="descr">
+                        <h4>Cooking instructions</h4>
+                    </label>
+                    <div class="row">
+                        <div class="col-lg-12">
+                                <textarea th:field="*{cookingInstructions}" id="descr" cols="20" rows="10"
+                                          class="form-control"
+                                          placeholder="Explain all the required steps..." required></textarea>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <hr>
+
+
+                    <div class="">
+                        <button class="btn btn-success btn-lg btn-block mt-3" type="submit">Submit</button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="/fragments/commons :: footer">
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="/js/functions.js"></script>
+</body>
+
+</html>

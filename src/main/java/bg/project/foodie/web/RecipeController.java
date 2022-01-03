@@ -88,8 +88,6 @@ public class RecipeController {
         RecipeServiceModel recipeServiceModel = modelMapper.map(recipeBindingModel, RecipeServiceModel.class);
         recipeService.addRecipe(recipeServiceModel, principal);
 
-
-        //TODO: implement business logic; also in the thymeleaf template i have to find a way to get a list from the user input
         return "redirect:/recipes/all";
     }
 
@@ -118,8 +116,42 @@ public class RecipeController {
         return "redirect:/recipes/details/{recipeId}";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateRecipe(@PathVariable Long id, Model model) {
+        RecipeViewModel recipe = recipeService.getRecipeViewById(id);
+        RecipeBindingModel bindingModel = modelMapper.map(recipe, RecipeBindingModel.class);
+        model.addAttribute("recipe", bindingModel);
+        return "recipe-update";
+    }
 
+    @PatchMapping("/update/{id}")
+    public String updateRecipePatch(@PathVariable Long id,
+                                    @Valid RecipeViewModel recipe,
+                                    BindingResult bindingResult,
+                                    RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("recipe", recipe)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.recipe", bindingResult);
 
+            return "redirect:update/" + id;
+        }
+
+        RecipeServiceModel serviceModel = modelMapper.map(recipe, RecipeServiceModel.class);
+        serviceModel.setId(id);
+        boolean isUpdated = recipeService.updateRecipe(serviceModel);
+
+        if (!isUpdated) {
+            return "redirect:update/{id}";
+        }
+
+        return "redirect:/recipes/details/{id}";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable Long id) {
+        recipeService.deleteById(id);
+        return "redirect:/recipes/all";
+    }
 
 
 }

@@ -42,8 +42,6 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6" th:each="r : ${recipes}" th:object="${r}">
                     <div class="recipe-card card">
-                        <!--                        src="/images/1.jpg"-->
-                        <!--                        th:src="*{imageUrl}"-->
                         <img class="card-img-top" alt="" th:src="*{pictureUrl}">
                         <div class="card-body">
                             <h5 th:text="*{name}" class="card-title">Card title</h5>

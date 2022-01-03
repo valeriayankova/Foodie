@@ -1,8 +1,7 @@
 package bg.project.foodie.service.impl;
 
 import bg.project.foodie.cloudinary.*;
-import bg.project.foodie.model.entity.ProductEntity;
-import bg.project.foodie.model.entity.RecipeEntity;
+import bg.project.foodie.model.entity.*;
 import bg.project.foodie.model.service.RecipeServiceModel;
 import bg.project.foodie.model.view.RecipeViewModel;
 import bg.project.foodie.repository.ProductRepository;
@@ -42,14 +41,7 @@ public class RecipeServiceImpl implements RecipeService {
     public void addRecipe(RecipeServiceModel recipeServiceModel, Principal principal) throws IOException {
         RecipeEntity recipe = modelMapper.map(recipeServiceModel, RecipeEntity.class);
 
-        Set<ProductEntity> products = recipeServiceModel.getProducts().stream()
-                .map(productBindingModel -> {
-                    ProductEntity product = modelMapper.map(productBindingModel, ProductEntity.class);
-                    product.setRecipe(recipe);
-                    productRepository.save(product);
-
-                    return product;
-                })
+        Set<ProductEntity> products = recipeServiceModel.getProducts().stream().map(p -> modelMapper.map(p, ProductEntity.class))
                 .collect(Collectors.toSet());
 
         if (!recipeServiceModel.getPicture().isEmpty()) {
@@ -63,7 +55,10 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setAuthor(userService.findUserByUsername(principal.getName()));
 
         recipeRepository.save(recipe);
-
+        recipe.getProducts().forEach(p -> {
+            p.setRecipe(recipe);
+            productRepository.save(p);
+        });
     }
 
     @Override
@@ -89,5 +84,42 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public RecipeEntity findById(Long id) {
         return recipeRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public boolean updateRecipe(RecipeServiceModel serviceModel) {
+        RecipeEntity recipeEntity = recipeRepository.findById(serviceModel.getId()).orElse(null);
+
+        if (recipeEntity == null) {
+            return false;
+        }
+
+        recipeEntity.getProducts().forEach(productRepository::delete);
+        Set<ProductEntity> products = serviceModel.getProducts().stream()
+                .map(p -> {
+                    ProductEntity product = modelMapper.map(p, ProductEntity.class);
+                    product.setRecipe(recipeEntity);
+                    productRepository.save(product);
+                    return product;
+                })
+                .collect(Collectors.toSet());
+
+        CategoryEntity category = categoryService.findByName(serviceModel.getCategory());
+
+        recipeEntity.setCategory(category);
+        recipeEntity.setProducts(products);
+        recipeEntity.setName(serviceModel.getName());
+        recipeEntity.setCookingInstructions(serviceModel.getCookingInstructions());
+        recipeEntity.setPortions(serviceModel.getPortions());
+        recipeEntity.setCookingTime(serviceModel.getCookingTime());
+        recipeEntity.setShortDescription(serviceModel.getShortDescription());
+
+        recipeRepository.save(recipeEntity);
+        return true;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        recipeRepository.deleteById(id);
     }
 }

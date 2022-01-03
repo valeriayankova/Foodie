@@ -10,6 +10,7 @@ import java.util.List;
 
 public class RecipeBindingModel {
 
+    private Long id;
     private String name;
     private String cookingInstructions;
     private String shortDescription;
@@ -18,6 +19,14 @@ public class RecipeBindingModel {
     private Integer portionsServed;
     private List<ProductBindingModel> products;
     private MultipartFile picture;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @NotNull
     @Size(min = 3)

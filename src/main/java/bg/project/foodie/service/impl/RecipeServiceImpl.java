@@ -2,6 +2,7 @@ package bg.project.foodie.service.impl;
 
 import bg.project.foodie.cloudinary.*;
 import bg.project.foodie.model.entity.*;
+import bg.project.foodie.model.entity.enums.*;
 import bg.project.foodie.model.service.*;
 import bg.project.foodie.model.view.RecipeViewModel;
 import bg.project.foodie.repository.ProductRepository;
@@ -14,8 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.security.Principal;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -101,6 +101,8 @@ public class RecipeServiceImpl implements RecipeService {
             return false;
         }
 
+        
+
         productRepository.deleteAll(recipeEntity.getProducts());
         Set<ProductEntity> products = serviceModel.getProducts().stream()
                 .map(p -> {
@@ -128,5 +130,12 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<RecipeViewModel> getAllRecipesByCategory(String c) {
+        return recipeRepository.findAllByCategory(c).stream()
+                .map(r -> modelMapper.map(r, RecipeViewModel.class))
+                .collect(Collectors.toList());
     }
 }

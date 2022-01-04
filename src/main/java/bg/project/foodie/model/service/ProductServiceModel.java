@@ -8,6 +8,7 @@ public class ProductServiceModel {
 
     private String name;
     private Double quantity;
+    private String measurement;
 
     @NotNull
     @Size(min = 3)
@@ -27,5 +28,13 @@ public class ProductServiceModel {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 }

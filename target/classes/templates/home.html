@@ -53,16 +53,16 @@
 
             <div class="container">
                 <div class="row justify-content-center flex-row">
-                    <a class="col-md-2 btn btn-outline-secondary m-1 p-3">
+                    <a th:href="@{/recipes/{category}(category='breakfast')}" class="col-md-2 btn btn-outline-secondary m-1 p-3">
                         Breakfast
                     </a>
-                    <a class="col-md-2 btn btn-outline-secondary m-1 p-3">
+                    <a th:href="@{/recipes/{category}(category='lunch')}" class="col-md-2 btn btn-outline-secondary m-1 p-3">
                         Lunch
                     </a>
-                    <a class="col-md-2 btn btn-outline-secondary m-1 p-3">
+                    <a th:href="@{/recipes/{category}(category='dinner')}" class="col-md-2 btn btn-outline-secondary m-1 p-3">
                         Dinner
                     </a>
-                    <a class="col-md-2 btn btn-outline-secondary m-1 p-3">
+                    <a th:href="@{/recipes/{category}(category='dinner')}" class="col-md-2 btn btn-outline-secondary m-1 p-3">
                         Desserts
                     </a>
                 </div>

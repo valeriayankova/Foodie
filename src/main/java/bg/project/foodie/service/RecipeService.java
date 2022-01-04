@@ -1,6 +1,7 @@
 package bg.project.foodie.service;
 
 import bg.project.foodie.model.entity.RecipeEntity;
+import bg.project.foodie.model.entity.enums.*;
 import bg.project.foodie.model.service.RecipeServiceModel;
 import bg.project.foodie.model.view.RecipeViewModel;
 
@@ -20,4 +21,6 @@ public interface RecipeService {
     boolean updateRecipe(RecipeServiceModel serviceModel);
 
     void deleteById(Long id);
+
+    List<RecipeViewModel> getAllRecipesByCategory(String c);
 }

@@ -101,13 +101,24 @@
                                        id="product" class="form-control form-control-lg"/>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
+                            <div class="col-lg-3 mb-3">
                                 <!--                                <label th:for="${product}.quantity">Quantity(grams)</label>-->
-                                Quantity(grams)
+                                Quantity
                                 <input th:field="*{products[__${iterStat.index}__].quantity}" type="number"
                                        id="quantity" step="0.1" min="0"
                                        class="form-control form-control-lg"/>
                             </div>
+
+                            <!-- TODO: adding new rows doesn't work for measurements -->
+<!--                            <div class="col-lg-3 mb-3">-->
+<!--                                Measurement-->
+<!--                                <select th:field="*{products[__${iterStat.index}__].measurement}" class="form-control form-control-lg" name="measurement" id="measure">-->
+<!--                                    <option value="">-</option>-->
+<!--                                    <option th:each="mu : ${T(bg.project.foodie.model.entity.enums.MeasuringUnitEnum).values()}"-->
+<!--                                          th:text="${mu}"  th:value="${mu}"></option>-->
+<!--                                </select>-->
+
+<!--                            </div>-->
 
                         </div>
                     </div>

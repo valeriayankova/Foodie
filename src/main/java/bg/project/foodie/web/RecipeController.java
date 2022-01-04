@@ -1,5 +1,6 @@
 package bg.project.foodie.web;
 
+import bg.project.foodie.model.entity.enums.*;
 import bg.project.foodie.model.service.ProductServiceModel;
 import bg.project.foodie.model.service.RecipeServiceModel;
 import bg.project.foodie.model.service.ReviewServiceModel;
@@ -17,7 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 import java.io.*;
 import java.security.Principal;
-import java.util.List;
+import java.util.*;
+import java.util.stream.*;
 
 @Controller
 @RequestMapping("/recipes")
@@ -40,11 +42,15 @@ public class RecipeController {
     }
 
 
-    @GetMapping("/all")
-    public String recipes(Model model) {
-
-        List<RecipeViewModel> recipeViewModels = recipeService.getAllRecipeViewModels();
-        model.addAttribute("recipes", recipeViewModels);
+    @GetMapping(value = {"","/{category}"})
+    public String recipes(@PathVariable(required = false) String category, Model model) {
+        if (category != null) {
+            List<RecipeViewModel> recipes = recipeService.getAllRecipesByCategory(category.toUpperCase());
+            model.addAttribute("categoryRecipes", recipes);
+        } else {
+            List<RecipeViewModel> recipeViewModels = recipeService.getAllRecipeViewModels();
+            model.addAttribute("recipes", recipeViewModels);
+        }
 
         return "recipes-all";
     }
@@ -54,7 +60,9 @@ public class RecipeController {
         RecipeServiceModel recipeServiceModel = new RecipeServiceModel();
         ProductServiceModel productServiceModel = new ProductServiceModel();
         recipeServiceModel.setProducts(List.of(productServiceModel));
+        List<MeasuringUnitEnum> measurements = Arrays.stream(MeasuringUnitEnum.values()).collect(Collectors.toList());
         model.addAttribute("recipeServiceModel", recipeServiceModel);
+        model.addAttribute("measurements", measurements);
         return "recipe-add";
     }
 
@@ -149,5 +157,11 @@ public class RecipeController {
         return "redirect:/recipes/all";
     }
 
-
+//    @GetMapping("/{category}")
+//    public String getRecipesByCategory(@PathVariable String category, Model model) {
+//        CategoryNameEnum c = CategoryNameEnum.valueOf(category);
+//        List<RecipeViewModel> recipes = recipeService.getAllRecipesByCategory(c);
+//        model.addAttribute("categoryRecipes", recipes);
+//        return "recipes-all";
+//    }
 }

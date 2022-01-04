@@ -11,6 +11,7 @@ public class ProductEntity extends BaseEntity {
 
     private String name;
     private Double quantity;
+    private String measurement;
     private RecipeEntity recipe;
 
     @Column(nullable = false)
@@ -29,6 +30,15 @@ public class ProductEntity extends BaseEntity {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    @Column
+    public String getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(String measurement) {
+        this.measurement = measurement;
     }
 
     @ManyToOne

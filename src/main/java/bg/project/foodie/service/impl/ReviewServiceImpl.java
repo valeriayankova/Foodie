@@ -40,6 +40,7 @@ public class ReviewServiceImpl implements ReviewService {
         review.setRecipe(recipe);
         reviewRepository.save(review);
 
+        recipe.getReviews().add(review);
     }
 
     @Override

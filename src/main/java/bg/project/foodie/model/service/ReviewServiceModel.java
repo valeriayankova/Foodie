@@ -3,17 +3,17 @@ package bg.project.foodie.model.service;
 import javax.validation.constraints.*;
 
 public class ReviewServiceModel {
-    private Long id;
+    private Long reviewId;
     private Integer score;
     private String description;
     private Integer recipeId;
 
-    public Long getId() {
-        return id;
+    public Long getReviewId() {
+        return reviewId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
     }
 
     @NotNull

@@ -1,18 +1,26 @@
 package bg.project.foodie.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "reviews")
-public class ReviewEntity extends BaseEntity {
+public class ReviewEntity {
 
+    private Long reviewId;
     private Integer score;
     private String description;
     private UserEntity author;
     private RecipeEntity recipe;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
+    }
 
     @Column(nullable = false)
     public Integer getScore() {

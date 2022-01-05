@@ -14,4 +14,8 @@ public interface RecipeRepository extends JpaRepository<RecipeEntity, Long> {
     @Query(value = "SELECT * FROM recipes AS r JOIN categories AS c ON r.category_id=c.id " +
             "WHERE c.name = :category", nativeQuery = true)
     List<RecipeEntity> findAllByCategory(@Param("category") String category);
+
+    //TODO: write query to extract the highest rated recipe!
+//    @Query()
+//    RecipeEntity findRecipeByHighestRating();
 }

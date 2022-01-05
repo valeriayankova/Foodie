@@ -18,6 +18,7 @@ public class RecipeEntity extends BaseEntity {
     private String picturePublicId;
     private UserEntity author;
     private Set<ProductEntity> products;
+    private Set<ReviewEntity> reviews;
 
     @Column(nullable = false)
     public String getName() {
@@ -107,5 +108,14 @@ public class RecipeEntity extends BaseEntity {
 
     public void setProducts(Set<ProductEntity> products) {
         this.products = products;
+    }
+
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public Set<ReviewEntity> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<ReviewEntity> reviews) {
+        this.reviews = reviews;
     }
 }

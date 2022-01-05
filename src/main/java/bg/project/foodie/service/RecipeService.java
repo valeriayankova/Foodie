@@ -23,4 +23,8 @@ public interface RecipeService {
     void deleteById(Long id);
 
     List<RecipeViewModel> getAllRecipesByCategory(String c);
+
+    //TODO
+//    RecipeViewModel findHighestRatedRecipe();
+
 }

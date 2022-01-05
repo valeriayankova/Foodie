@@ -107,7 +107,6 @@ public class RecipeController {
         }
 
         reviewService.addReview(id, reviewServiceModel, principal);
-
         return "redirect:/recipes/details/{id}";
     }
 
@@ -152,4 +151,10 @@ public class RecipeController {
         recipeService.deleteById(id);
         return "redirect:/recipes/all";
     }
+
+    //TODO
+//    @GetMapping("/recipes/details/favourite")
+//    public String getHighestRatedRecipe(Model model) {
+//        RecipeViewModel recipe = recipeService.findHighestRatedRecipe();
+//    }
 }

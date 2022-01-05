@@ -1,6 +1,5 @@
 package bg.project.foodie.web;
 
-import bg.project.foodie.model.entity.enums.*;
 import bg.project.foodie.model.service.ProductServiceModel;
 import bg.project.foodie.model.service.RecipeServiceModel;
 import bg.project.foodie.model.service.ReviewServiceModel;
@@ -19,7 +18,6 @@ import javax.validation.Valid;
 import java.io.*;
 import java.security.Principal;
 import java.util.*;
-import java.util.stream.*;
 
 @Controller
 @RequestMapping("/recipes")
@@ -60,9 +58,7 @@ public class RecipeController {
         RecipeServiceModel recipeServiceModel = new RecipeServiceModel();
         ProductServiceModel productServiceModel = new ProductServiceModel();
         recipeServiceModel.setProducts(List.of(productServiceModel));
-        List<MeasuringUnitEnum> measurements = Arrays.stream(MeasuringUnitEnum.values()).collect(Collectors.toList());
         model.addAttribute("recipeServiceModel", recipeServiceModel);
-        model.addAttribute("measurements", measurements);
         return "recipe-add";
     }
 
@@ -156,12 +152,4 @@ public class RecipeController {
         recipeService.deleteById(id);
         return "redirect:/recipes/all";
     }
-
-//    @GetMapping("/{category}")
-//    public String getRecipesByCategory(@PathVariable String category, Model model) {
-//        CategoryNameEnum c = CategoryNameEnum.valueOf(category);
-//        List<RecipeViewModel> recipes = recipeService.getAllRecipesByCategory(c);
-//        model.addAttribute("categoryRecipes", recipes);
-//        return "recipes-all";
-//    }
 }

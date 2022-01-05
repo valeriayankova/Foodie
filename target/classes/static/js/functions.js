@@ -12,7 +12,7 @@ $(document).ready(function () {
                 ' <input name="products[' + index + '].name" type="text" class="form-control form-control-lg"/>' +
                 ' </div>' +
                 ' <div class="col-lg-3 mb-3">' +
-                '  Quantity(grams)\n' +
+                '  Quantity\n' +
                 ' <input name="products[' + index + '].quantity" type="number" step="0.1" min="0"' +
                 ' class="form-control form-control-lg"/>' +
                 '</div>' +

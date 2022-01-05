@@ -89,7 +89,7 @@ public class RecipeController {
 
         recipeService.addRecipe(recipeServiceModel, principal);
 
-        return "redirect:/recipes/all";
+        return "redirect:/all";
     }
 
     @PostMapping("/details/{id}/review/add")
@@ -149,7 +149,7 @@ public class RecipeController {
     @DeleteMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable Long id) {
         recipeService.deleteById(id);
-        return "redirect:/recipes/all";
+        return "redirect:/recipes";
     }
 
     //TODO

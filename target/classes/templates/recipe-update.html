@@ -89,7 +89,6 @@
                     <div class="products" th:each="product, iterStat : *{products}">
                         <div class="product row">
 
-
                             <div class="col-lg-6 mb-3">
                                 Name
                                 <input th:field="*{products[__${iterStat.index}__].name}"

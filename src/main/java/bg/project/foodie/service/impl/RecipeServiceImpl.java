@@ -92,6 +92,7 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository.findById(id).orElse(null);
     }
 
+    //TODO: fix update
     @Override
     public boolean updateRecipe(RecipeServiceModel serviceModel) {
         RecipeEntity recipeEntity = recipeRepository.findById(serviceModel.getId()).orElse(null);
@@ -99,7 +100,6 @@ public class RecipeServiceImpl implements RecipeService {
         if (recipeEntity == null) {
             return false;
         }
-
 
         productRepository.deleteAll(recipeEntity.getProducts());
         Set<ProductEntity> products = serviceModel.getProducts().stream()

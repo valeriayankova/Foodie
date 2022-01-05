@@ -108,7 +108,12 @@ li > form > input {
 
 .cover-image{
     position: relative;
-    /*height: 600px;*/
+}
+
+.card-img-top{
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
 }
 
 

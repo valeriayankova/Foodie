@@ -2,7 +2,6 @@ package bg.project.foodie.service.impl;
 
 import bg.project.foodie.cloudinary.*;
 import bg.project.foodie.model.entity.*;
-import bg.project.foodie.model.entity.enums.*;
 import bg.project.foodie.model.service.*;
 import bg.project.foodie.model.view.RecipeViewModel;
 import bg.project.foodie.repository.ProductRepository;
@@ -101,7 +100,6 @@ public class RecipeServiceImpl implements RecipeService {
             return false;
         }
 
-        
 
         productRepository.deleteAll(recipeEntity.getProducts());
         Set<ProductEntity> products = serviceModel.getProducts().stream()
@@ -129,7 +127,16 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void deleteById(Long id) {
-        recipeRepository.deleteById(id);
+        RecipeEntity recipe = recipeRepository.findById(id).orElse(null);
+
+        if (recipe != null) {
+            String publicId = recipe.getPicturePublicId();
+
+            if (publicId != null) {
+                cloudinaryService.delete(publicId);
+            }
+            recipeRepository.delete(recipe);
+        }
     }
 
     @Override

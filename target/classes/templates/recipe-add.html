@@ -110,15 +110,23 @@
                             </div>
 
                             <!-- TODO: adding new rows doesn't work for measurements -->
-<!--                            <div class="col-lg-3 mb-3">-->
-<!--                                Measurement-->
-<!--                                <select th:field="*{products[__${iterStat.index}__].measurement}" class="form-control form-control-lg" name="measurement" id="measure">-->
-<!--                                    <option value="">-</option>-->
-<!--                                    <option th:each="mu : ${T(bg.project.foodie.model.entity.enums.MeasuringUnitEnum).values()}"-->
-<!--                                          th:text="${mu}"  th:value="${mu}"></option>-->
-<!--                                </select>-->
+                            <div class="col-lg-3 mb-3">
+                                Measurement
+                                <select th:field="*{products[__${iterStat.index}__].measurement}" class="form-control form-control-lg" name="measurement" id="measure">
+                                    <option value="">-</option>
+                                    <option value="kg">kg</option>
+                                    <option value="g">g</option>
+                                    <option value="tablespoons">tablespoons</option>
+                                    <option value="cups">cups</option>
+                                    <option value="pints">pints</option>
+                                    <option value="ml">ml</option>
+                                    <option value="teaspoon">teaspoon</option>
+                                    <option value="large">large</option>
+                                    <option value="medium">medium</option>
+                                    <option value="small">small</option>
+                                </select>
 
-<!--                            </div>-->
+                            </div>
 
                         </div>
                     </div>

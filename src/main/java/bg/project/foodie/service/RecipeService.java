@@ -24,7 +24,6 @@ public interface RecipeService {
 
     List<RecipeViewModel> getAllRecipesByCategory(String c);
 
-    //TODO
-//    RecipeViewModel findHighestRatedRecipe();
+    RecipeViewModel findHighestRatedRecipe();
 
 }

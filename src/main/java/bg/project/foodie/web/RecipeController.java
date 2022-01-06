@@ -152,9 +152,9 @@ public class RecipeController {
         return "redirect:/recipes";
     }
 
-    //TODO
-//    @GetMapping("/recipes/details/favourite")
-//    public String getHighestRatedRecipe(Model model) {
-//        RecipeViewModel recipe = recipeService.findHighestRatedRecipe();
-//    }
+    @GetMapping("/details/favorite")
+    public String getHighestRatedRecipe() {
+        RecipeViewModel recipe = recipeService.findHighestRatedRecipe();
+        return "redirect:/recipes/details/" + recipe.getId();
+    }
 }

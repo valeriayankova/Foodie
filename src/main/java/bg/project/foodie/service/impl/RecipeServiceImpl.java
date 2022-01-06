@@ -146,10 +146,9 @@ public class RecipeServiceImpl implements RecipeService {
                 .collect(Collectors.toList());
     }
 
-    //TODO
-//    @Override
-//    public RecipeViewModel findHighestRatedRecipe() {
-////        recipeRepository.findRecipeByHighestRating();
-//        return null;
-//    }
+    @Override
+    public RecipeViewModel findHighestRatedRecipe() {
+        RecipeEntity recipe = recipeRepository.findRecipeByHighestRating();
+        return modelMapper.map(recipe, RecipeViewModel.class);
+    }
 }

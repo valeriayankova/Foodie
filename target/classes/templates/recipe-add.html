@@ -97,7 +97,7 @@
                             <div class="col-lg-6 mb-3">
                                 <!--                                <label th:for="${product}.name">Name</label>-->
                                 Name
-                                <input th:field="*{products[__${iterStat.index}__].name}"
+                                <input th:field="*{products[__${iterStat.index}__].productName}"
                                        id="product" class="form-control form-control-lg"/>
                             </div>
 
@@ -109,7 +109,6 @@
                                        class="form-control form-control-lg"/>
                             </div>
 
-                            <!-- TODO: adding new rows doesn't work for measurements -->
                             <div class="col-lg-3 mb-3">
                                 Measurement
                                 <select th:field="*{products[__${iterStat.index}__].measurement}" class="form-control form-control-lg" name="measurement" id="measure">

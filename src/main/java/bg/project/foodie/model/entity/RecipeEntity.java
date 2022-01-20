@@ -25,8 +25,9 @@ public class RecipeEntity extends BaseEntity {
         return name;
     }
 
-    public void setName(String name) {
+    public RecipeEntity setName(String name) {
         this.name = name;
+        return this;
     }
 
     @Column(nullable = false)
@@ -34,8 +35,9 @@ public class RecipeEntity extends BaseEntity {
         return shortDescription;
     }
 
-    public void setShortDescription(String shortDescription) {
+    public RecipeEntity setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+        return this;
     }
 
     @Column(columnDefinition = "TEXT", nullable = false)
@@ -43,8 +45,9 @@ public class RecipeEntity extends BaseEntity {
         return cookingInstructions;
     }
 
-    public void setCookingInstructions(String cookingInstructions) {
+    public RecipeEntity setCookingInstructions(String cookingInstructions) {
         this.cookingInstructions = cookingInstructions;
+        return this;
     }
 
     @Column(nullable = false)
@@ -52,8 +55,9 @@ public class RecipeEntity extends BaseEntity {
         return cookingTime;
     }
 
-    public void setCookingTime(Integer cookingTime) {
+    public RecipeEntity setCookingTime(Integer cookingTime) {
         this.cookingTime = cookingTime;
+        return this;
     }
 
     @Column(nullable = false)
@@ -61,8 +65,9 @@ public class RecipeEntity extends BaseEntity {
         return portions;
     }
 
-    public void setPortions(Integer portionsServed) {
+    public RecipeEntity setPortions(Integer portionsServed) {
         this.portions = portionsServed;
+        return this;
     }
 
     @Column
@@ -70,8 +75,9 @@ public class RecipeEntity extends BaseEntity {
         return pictureUrl;
     }
 
-    public void setPictureUrl(String pictureUrl) {
+    public RecipeEntity setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+        return this;
     }
 
     @Column
@@ -79,8 +85,9 @@ public class RecipeEntity extends BaseEntity {
         return picturePublicId;
     }
 
-    public void setPicturePublicId(String picturePublicId) {
+    public RecipeEntity setPicturePublicId(String picturePublicId) {
         this.picturePublicId = picturePublicId;
+        return this;
     }
 
     @ManyToOne
@@ -88,8 +95,9 @@ public class RecipeEntity extends BaseEntity {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+    public RecipeEntity setCategory(CategoryEntity category) {
         this.category = category;
+        return this;
     }
 
     @ManyToOne
@@ -97,17 +105,20 @@ public class RecipeEntity extends BaseEntity {
         return author;
     }
 
-    public void setAuthor(UserEntity author) {
+    public RecipeEntity setAuthor(UserEntity author) {
         this.author = author;
+        return this;
     }
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    @JoinColumn
     public Set<ProductEntity> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<ProductEntity> products) {
+    public RecipeEntity setProducts(Set<ProductEntity> products) {
         this.products = products;
+        return this;
     }
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -115,7 +126,8 @@ public class RecipeEntity extends BaseEntity {
         return reviews;
     }
 
-    public void setReviews(Set<ReviewEntity> reviews) {
+    public RecipeEntity setReviews(Set<ReviewEntity> reviews) {
         this.reviews = reviews;
+        return this;
     }
 }

@@ -17,7 +17,7 @@
     <div class="add-recipe container py-5 mt-5 p-md-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-12 col-md-8 col-lg-8 col-xl-8 m-5">
-                <form th:object="${recipe}" th:action="@{/recipes/update/{id}(id=*{id})}" th:method="PATCH" id="recipe-add"
+                <form th:object="${recipeUpdate}" th:action="@{/recipes/update/{id}(id=*{id})}" th:method="PATCH" id="recipe-add"
                       class="card-body p-5 text-center" enctype="multipart/form-data">
 
                     <h2 class="mb-3">Add a new recipe</h2>
@@ -58,7 +58,6 @@
                                    required/>
 
                         </div>
-
                         <div class="form-outline col-lg-6 mb-3">
                             <label class="form-label" for="cook-time">
                                 <h6>Cooking time(minutes)</h6>
@@ -82,33 +81,50 @@
                             </option>
                         </select>
                     </div>
+
                     <hr>
 
                     <h4>Products</h4>
 
-                    <div class="update-prod" th:each="product, iterStat : *{products}">
+                    <div class="products" th:each="p,index : *{products}">
                         <div class="product row">
+
 
                             <div class="col-lg-6 mb-3">
                                 Name
-                                <input th:field="*{products[__${iterStat.index}__].name}"
+                                <input th:field="*{products[__${index.index}__].productName}"
+                                       name="productName"
                                        id="product" class="form-control form-control-lg"/>
                             </div>
 
-                            <div class="col-lg-6 mb-3">
-                                Quantity(grams)
-                                <input th:field="*{products[__${iterStat.index}__].quantity}" type="number"
+                            <div class="col-lg-3 mb-3">
+                                Quantity
+                                <input th:field="*{products[__${index.index}__].quantity}"
+                                       type="number"
                                        id="quantity" step="0.1" min="0"
+                                       name="quantity"
                                        class="form-control form-control-lg"/>
                             </div>
 
+                            <div class="col-lg-3 mb-3">
+                                Measurement
+                                <select th:field="*{products[__${index.index}__].measurement}"
+                                        class="form-control form-control-lg" name="measurement" id="measure">
+                                    <option value="">-</option>
+                                    <option value="kg">kg</option>
+                                    <option value="g">g</option>
+                                    <option value="tablespoons">tablespoons</option>
+                                    <option value="cups">cups</option>
+                                    <option value="pints">pints</option>
+                                    <option value="ml">ml</option>
+                                    <option value="teaspoon">teaspoon</option>
+                                    <option value="large">large</option>
+                                    <option value="medium">medium</option>
+                                    <option value="small">small</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-
-                    <button type="button"
-                            class="add-product btn btn-outline-secondary col-lg-12">+ Add another
-                        product
-                    </button>
 
                     <hr>
 
@@ -128,10 +144,9 @@
                     <hr>
 
 
-                    <div class="">
+                    <div>
                         <button class="btn btn-success btn-lg btn-block mt-3" type="submit">Submit</button>
                     </div>
-
 
                 </form>
             </div>
@@ -142,17 +157,6 @@
 
 <footer th:replace="/fragments/commons :: footer">
 </footer>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<script src="/js/functions.js"></script>
 </body>
 
 </html>

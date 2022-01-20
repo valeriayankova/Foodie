@@ -6,18 +6,18 @@ import javax.validation.constraints.Size;
 
 public class ProductServiceModel {
 
-    private String name;
+    private String productName;
     private Double quantity;
     private String measurement;
 
     @NotNull
     @Size(min = 3)
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     @NotNull

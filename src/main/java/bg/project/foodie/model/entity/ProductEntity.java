@@ -1,26 +1,23 @@
 package bg.project.foodie.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
 
-    private String name;
+    private String productName;
     private Double quantity;
     private String measurement;
-    private RecipeEntity recipe;
+//    private RecipeEntity recipe;
 
     @Column(nullable = false)
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String name) {
+        this.productName = name;
     }
 
     @Column(nullable = false)
@@ -41,12 +38,12 @@ public class ProductEntity extends BaseEntity {
         this.measurement = measurement;
     }
 
-    @ManyToOne
-    public RecipeEntity getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(RecipeEntity recipe) {
-        this.recipe = recipe;
-    }
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    public RecipeEntity getRecipe() {
+//        return recipe;
+//    }
+//
+//    public void setRecipe(RecipeEntity recipe) {
+//        this.recipe = recipe;
+//    }
 }

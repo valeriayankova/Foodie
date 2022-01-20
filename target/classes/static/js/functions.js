@@ -9,7 +9,7 @@ $(document).ready(function () {
             let newRow = jQuery('<div class="product row">' +
                 ' <div class="col-lg-6 mb-3">' +
                 ' Name' +
-                ' <input name="products[' + index + '].name" type="text" class="form-control form-control-lg"/>' +
+                ' <input name="products[' + index + '].productName" type="text" class="form-control form-control-lg"/>' +
                 ' </div>' +
                 ' <div class="col-lg-3 mb-3">' +
                 '  Quantity\n' +

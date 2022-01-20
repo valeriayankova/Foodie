@@ -18,7 +18,7 @@ public interface RecipeService {
 
     RecipeEntity findById(Long id);
 
-    boolean updateRecipe(RecipeServiceModel serviceModel);
+    boolean updateRecipe(RecipeServiceModel serviceModel, Principal principal);
 
     void deleteById(Long id);
 

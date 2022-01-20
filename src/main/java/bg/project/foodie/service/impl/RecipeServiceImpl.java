@@ -12,6 +12,7 @@ import bg.project.foodie.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.*;
 import java.io.*;
 import java.security.Principal;
 import java.util.*;
@@ -40,7 +41,8 @@ public class RecipeServiceImpl implements RecipeService {
     public void addRecipe(RecipeServiceModel recipeServiceModel, Principal principal) throws IOException {
         RecipeEntity recipe = modelMapper.map(recipeServiceModel, RecipeEntity.class);
 
-        Set<ProductEntity> products = recipeServiceModel.getProducts().stream().map(p -> modelMapper.map(p, ProductEntity.class))
+        Set<ProductEntity> products = recipeServiceModel.getProducts().stream()
+                .map(p -> modelMapper.map(p, ProductEntity.class))
                 .collect(Collectors.toSet());
 
         if (!recipeServiceModel.getPicture().isEmpty()) {
@@ -54,10 +56,6 @@ public class RecipeServiceImpl implements RecipeService {
         recipe.setAuthor(userService.findUserByUsername(principal.getName()));
 
         recipeRepository.save(recipe);
-        recipe.getProducts().forEach(p -> {
-            p.setRecipe(recipe);
-            productRepository.save(p);
-        });
     }
 
     @Override
@@ -92,37 +90,27 @@ public class RecipeServiceImpl implements RecipeService {
         return recipeRepository.findById(id).orElse(null);
     }
 
-    //TODO: fix update
     @Override
-    public boolean updateRecipe(RecipeServiceModel serviceModel) {
-        RecipeEntity recipeEntity = recipeRepository.findById(serviceModel.getId()).orElse(null);
-
-        if (recipeEntity == null) {
+    public boolean updateRecipe(RecipeServiceModel serviceModel, Principal principal) {
+        RecipeEntity updatedRecipe = modelMapper.map(serviceModel, RecipeEntity.class);
+        updatedRecipe.setCategory(categoryService.findByName(serviceModel.getCategory()));
+        RecipeEntity recipe = recipeRepository.findById(updatedRecipe.getId()).orElse(null);
+        if (!recipe.getAuthor().getUsername().equals(principal.getName())) {
             return false;
         }
-
-        productRepository.deleteAll(recipeEntity.getProducts());
-        Set<ProductEntity> products = serviceModel.getProducts().stream()
-                .map(p -> {
-                    ProductEntity product = modelMapper.map(p, ProductEntity.class);
-                    product.setRecipe(recipeEntity);
-                    productRepository.save(product);
-                    return product;
-                })
-                .collect(Collectors.toSet());
-
-        CategoryEntity category = categoryService.findByName(serviceModel.getCategory());
-
-        recipeEntity.setCategory(category);
-        recipeEntity.setProducts(products);
-        recipeEntity.setName(serviceModel.getName());
-        recipeEntity.setCookingInstructions(serviceModel.getCookingInstructions());
-        recipeEntity.setPortions(serviceModel.getPortions());
-        recipeEntity.setCookingTime(serviceModel.getCookingTime());
-        recipeEntity.setShortDescription(serviceModel.getShortDescription());
-
-        recipeRepository.save(recipeEntity);
+        updateEntity(updatedRecipe, recipe);
+        recipeRepository.save(recipe);
         return true;
+    }
+
+    private void updateEntity(RecipeEntity updatedRecipe, RecipeEntity recipe) {
+        recipe.setName(updatedRecipe.getName())
+                .setProducts(updatedRecipe.getProducts())
+                .setShortDescription(updatedRecipe.getShortDescription())
+                .setCategory(updatedRecipe.getCategory())
+                .setPortions(updatedRecipe.getPortions())
+                .setCookingTime(updatedRecipe.getCookingTime())
+                .setCookingInstructions(updatedRecipe.getCookingInstructions());
     }
 
     @Override

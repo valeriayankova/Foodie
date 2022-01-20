@@ -8,7 +8,6 @@ import bg.project.foodie.model.view.UserViewModel;
 import java.util.List;
 
 public interface UserService {
-
     void initializeAdmin();
 
     boolean registerUser(UserServiceModel userServiceModel);

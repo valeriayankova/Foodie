@@ -7,7 +7,6 @@ import javax.validation.constraints.*;
 import java.util.List;
 
 public class RecipeServiceModel {
-
     private Long id;
     private String name;
     private String cookingInstructions;

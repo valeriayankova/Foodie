@@ -11,7 +11,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
     private final UserService userService;
 
     public AdminController(UserService userService) {
@@ -30,7 +29,6 @@ public class AdminController {
 
     @GetMapping("/users")
     public String users(Model model) {
-
         List<AdminPanelUserViewModel> adminPanelUserViewModels = userService.findAllUsers();
         model.addAttribute("users", adminPanelUserViewModels);
 

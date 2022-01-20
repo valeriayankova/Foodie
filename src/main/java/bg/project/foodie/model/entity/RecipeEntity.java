@@ -7,7 +7,6 @@ import java.util.Set;
 @Entity
 @Table(name = "recipes")
 public class RecipeEntity extends BaseEntity {
-
     private String name;
     private String shortDescription;
     private String cookingInstructions;
@@ -110,7 +109,7 @@ public class RecipeEntity extends BaseEntity {
         return this;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval=true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn
     public Set<ProductEntity> getProducts() {
         return products;

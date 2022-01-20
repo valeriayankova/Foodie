@@ -7,8 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity{
-
+public class UserEntity extends BaseEntity {
     private String username;
     private String password;
     private String email;
@@ -112,8 +111,7 @@ public class UserEntity extends BaseEntity{
     }
 
     @PrePersist
-    public void beforeCreate(){
+    public void beforeCreate() {
         this.setCreated(LocalDate.now());
     }
-
 }

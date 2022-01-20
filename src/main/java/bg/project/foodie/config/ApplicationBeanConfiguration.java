@@ -23,18 +23,6 @@ public class ApplicationBeanConfiguration {
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();
-
-//        Converter<MultipartFile, Byte[]> byteConverter = new Converter<>() {
-//            @Override
-//            public Byte[] convert(MappingContext<MultipartFile, Byte[]> mappingContext) {
-//                try {
-//                    return objectConverter().toObjects(mappingContext.getSource().getBytes());
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                return null;
-//            }
-//        };
     }
 
     @Bean

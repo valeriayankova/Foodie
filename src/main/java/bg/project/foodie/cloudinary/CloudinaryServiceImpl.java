@@ -10,7 +10,6 @@ import java.util.Map;
 
 @Service
 public class CloudinaryServiceImpl implements CloudinaryService {
-
     private static final String TEMP_FILE = "temp-file";
     private static final String URL = "url";
     private static final String PUBLIC_ID = "public_id";

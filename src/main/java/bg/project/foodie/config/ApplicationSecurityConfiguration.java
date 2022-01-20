@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableWebSecurity
 public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
@@ -46,7 +45,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
                 .failureForwardUrl("/users/login")
                 .and()
                 .rememberMe()
-                .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(1))
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(1))
                 .key("verySecretKey")
                 .and()
                 .logout()

@@ -1,7 +1,6 @@
 package bg.project.foodie.model.view;
 
 public class ReviewViewModel {
-
     private Long id;
     private String username;
     private Integer score;

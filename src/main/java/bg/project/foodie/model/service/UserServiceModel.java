@@ -3,7 +3,6 @@ package bg.project.foodie.model.service;
 import javax.validation.constraints.*;
 
 public class UserServiceModel {
-
     private Long id;
     private String username;
     private String password;

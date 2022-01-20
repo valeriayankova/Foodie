@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-
     private final ReviewRepository reviewRepository;
     private final ModelMapper modelMapper;
     private final RecipeService recipeService;
@@ -30,7 +29,6 @@ public class ReviewServiceImpl implements ReviewService {
         this.userService = userService;
     }
 
-
     @Override
     public void addReview(Long id, ReviewServiceModel reviewServiceModel, Principal principal) {
         RecipeEntity recipe = recipeService.findById(id);
@@ -39,7 +37,6 @@ public class ReviewServiceImpl implements ReviewService {
         review.setAuthor(userService.findUserByUsername(principal.getName()));
         review.setRecipe(recipe);
         reviewRepository.save(review);
-
         recipe.getReviews().add(review);
     }
 

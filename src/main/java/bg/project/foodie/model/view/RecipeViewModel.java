@@ -6,7 +6,6 @@ import bg.project.foodie.model.service.*;
 import java.util.List;
 
 public class RecipeViewModel {
-
     private Long id;
     private String name;
     private String shortDescription;

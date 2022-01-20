@@ -95,6 +95,7 @@ public class RecipeServiceImpl implements RecipeService {
         RecipeEntity updatedRecipe = modelMapper.map(serviceModel, RecipeEntity.class);
         updatedRecipe.setCategory(categoryService.findByName(serviceModel.getCategory()));
         RecipeEntity recipe = recipeRepository.findById(updatedRecipe.getId()).orElse(null);
+        assert recipe != null;
         if (!recipe.getAuthor().getUsername().equals(principal.getName())) {
             return false;
         }
@@ -116,7 +117,6 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public void deleteById(Long id) {
         RecipeEntity recipe = recipeRepository.findById(id).orElse(null);
-
         if (recipe != null) {
             String publicId = recipe.getPicturePublicId();
 

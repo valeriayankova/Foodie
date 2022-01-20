@@ -9,7 +9,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "categories")
 public class CategoryEntity extends BaseEntity {
-
     private CategoryNameEnum name;
     private String shortDescription;
 

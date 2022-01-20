@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class SecurityUserServiceImpl implements UserDetailsService {
-
     private final UserRepository userRepository;
 
     public SecurityUserServiceImpl(UserRepository userRepository) {
@@ -24,7 +23,6 @@ public class SecurityUserServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         UserEntity userEntity = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with name + " + username + " not found!"));
 
@@ -32,11 +30,10 @@ public class SecurityUserServiceImpl implements UserDetailsService {
     }
 
     private static UserDetails mapToUserDetails(UserEntity userEntity) {
-
         List<GrantedAuthority> authorities =
                 userEntity.getRoles().stream()
-                .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName().name()))
-                .collect(Collectors.toList());
+                        .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName().name()))
+                        .collect(Collectors.toList());
 
         return new User(userEntity.getUsername(), userEntity.getPassword(), authorities);
     }

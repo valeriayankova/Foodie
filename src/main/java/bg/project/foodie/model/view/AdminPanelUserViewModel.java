@@ -1,7 +1,6 @@
 package bg.project.foodie.model.view;
 
 public class AdminPanelUserViewModel {
-
     private Long id;
     private String firstName;
     private String lastName;

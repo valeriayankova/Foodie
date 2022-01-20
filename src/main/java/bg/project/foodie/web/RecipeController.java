@@ -22,11 +22,9 @@ import java.util.*;
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
-
     private final RecipeService recipeService;
     private final ModelMapper modelMapper;
     private final ReviewService reviewService;
-
 
     public RecipeController(RecipeService recipeService, ModelMapper modelMapper, ReviewService reviewService) {
         this.recipeService = recipeService;
@@ -40,7 +38,7 @@ public class RecipeController {
     }
 
 
-    @GetMapping(value = {"","/{category}"})
+    @GetMapping(value = {"", "/{category}"})
     public String recipes(@PathVariable(required = false) String category, Model model) {
         if (category != null) {
             List<RecipeViewModel> recipes = recipeService.getAllRecipesByCategory(category.toUpperCase());
@@ -78,15 +76,12 @@ public class RecipeController {
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Principal principal) throws IOException {
-
-
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("recipeServiceModel", recipeServiceModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.recipeServiceModel", bindingResult);
 
             return "redirect:/recipes";
         }
-
         recipeService.addRecipe(recipeServiceModel, principal);
 
         return "redirect:/recipes";
@@ -98,7 +93,6 @@ public class RecipeController {
                                 BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes,
                                 Principal principal) {
-
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("reviewServiceModel", reviewServiceModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.reviewServiceModel", bindingResult);
@@ -138,14 +132,11 @@ public class RecipeController {
             return "redirect:update/{id}";
         }
 
-
         recipeServiceModel.setId(id);
         boolean isUpdated = recipeService.updateRecipe(recipeServiceModel, principal);
-
         if (!isUpdated) {
             return "redirect:/update/{id}";
         }
-
         return "redirect:/recipes/details/{id}";
     }
 

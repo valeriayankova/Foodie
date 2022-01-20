@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "reviews")
 public class ReviewEntity {
-
     private Long reviewId;
     private Integer score;
     private String description;

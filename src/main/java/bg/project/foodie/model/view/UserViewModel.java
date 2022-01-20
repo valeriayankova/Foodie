@@ -3,7 +3,6 @@ package bg.project.foodie.model.view;
 import java.time.LocalDate;
 
 public class UserViewModel {
-
     private Long id;
     private String username;
     private String password;

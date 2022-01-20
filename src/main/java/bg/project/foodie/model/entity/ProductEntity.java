@@ -5,11 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
-
     private String productName;
     private Double quantity;
     private String measurement;
-//    private RecipeEntity recipe;
 
     @Column(nullable = false)
     public String getProductName() {
@@ -37,13 +35,4 @@ public class ProductEntity extends BaseEntity {
     public void setMeasurement(String measurement) {
         this.measurement = measurement;
     }
-
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    public RecipeEntity getRecipe() {
-//        return recipe;
-//    }
-//
-//    public void setRecipe(RecipeEntity recipe) {
-//        this.recipe = recipe;
-//    }
 }

@@ -1,4 +1,5 @@
 package bg.project.foodie.web;
+
 import bg.project.foodie.model.service.UserServiceModel;
 import bg.project.foodie.model.view.UserViewModel;
 import bg.project.foodie.service.UserService;
@@ -14,7 +15,6 @@ import java.security.*;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -47,9 +47,8 @@ public class UserController {
     @PostMapping("/register")
     public String registerPost(@Valid UserServiceModel userServiceModel,
                                BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
         if (bindingResult.hasErrors() ||
-                !userServiceModel.getPassword().equals(userServiceModel.getConfirmPassword())){
+                !userServiceModel.getPassword().equals(userServiceModel.getConfirmPassword())) {
             redirectAttributes.addFlashAttribute("userRegisterService", userServiceModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
 
@@ -58,11 +57,10 @@ public class UserController {
 
         boolean isSuccessful = userService.registerUser(userServiceModel);
 
-        if (!isSuccessful){
+        if (!isSuccessful) {
             redirectAttributes.addFlashAttribute("usernameTaken", true);
             return "redirect:register";
         }
-
         return "redirect:/";
     }
 }

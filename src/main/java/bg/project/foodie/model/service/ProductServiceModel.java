@@ -5,7 +5,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 public class ProductServiceModel {
-
     private String productName;
     private Double quantity;
     private String measurement;

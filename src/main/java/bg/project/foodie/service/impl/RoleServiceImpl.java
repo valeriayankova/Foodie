@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-
     private final RoleRepository roleRepository;
 
     public RoleServiceImpl(RoleRepository roleRepository) {
@@ -19,7 +18,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void initializeRoles() {
-        if (roleRepository.count() > 0){
+        if (roleRepository.count() > 0) {
             return;
         }
 

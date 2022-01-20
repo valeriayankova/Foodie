@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
@@ -37,7 +36,6 @@ public class UserServiceImpl implements UserService {
         this.modelMapper = modelMapper;
         this.securityUserService = securityUserService;
     }
-
 
     @Override
     public void initializeAdmin() {
@@ -79,7 +77,6 @@ public class UserServiceImpl implements UserService {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-
         return true;
     }
 
@@ -113,7 +110,6 @@ public class UserServiceImpl implements UserService {
                     user.getRoles().add(roleService.findByRoleName(RoleNameEnum.ADMIN));
                     userRepository.save(user);
                 });
-
     }
 
     @Override
@@ -136,7 +132,6 @@ public class UserServiceImpl implements UserService {
         if (userEntity != null) {
             return modelMapper.map(userEntity, UserViewModel.class);
         }
-
         return null;
     }
 

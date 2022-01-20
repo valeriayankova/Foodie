@@ -9,11 +9,10 @@ import java.security.Principal;
 public class HomeController {
 
     @GetMapping
-    public String home(Principal principal){
+    public String home(Principal principal) {
         if (principal == null) {
             return "index";
         }
-
         return "home";
     }
 }

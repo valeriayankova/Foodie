@@ -33,7 +33,8 @@
                             <th scope="col">First Name</th>
                             <th scope="col">Last Name</th>
                             <th scope="col">Email Address</th>
-                            <th scope="col">Make Admin</th>
+                            <th scope="col">Change Role</th>
+                            <th scope="col">Save Changes</th>
                             <th scope="col">Delete User</th>
                         </tr>
                     </thead>
@@ -43,13 +44,22 @@
                             <td th:text="*{lastName}">Userov</td>
                             <td th:text="*{email}">user@user</td>
 
-                            <td th:unless="*{isAdmin()}">
+                            <td>
+                                <select class="form-select" name="select-role" id="select-role">
+                                    <option th:each="r : ${T(bg.project.foodie.model.entity.enums.RoleNameEnum).values()}"
+                                    th:text="${r.name()}" th:value="${r.name()}"
+                                    th:selected=""></option>
+                                </select>
+                            </td>
+
+                            <td>
                                 <form th:action="@{/admin/users/{id}(id = *{id})}" th:method="PATCH" class="m-1">
-                                    <input type="submit" class="btn btn-warning" value="Make Admin" />
+                                    <input type="submit" class="btn btn-warning" value="Save" />
                                 </form>
                             </td>
 
-                            <td th:unless="*{isAdmin()}">
+
+                            <td>
                                 <form th:action="@{/admin/users/{id}(id = *{id})}" th:method="DELETE" class="m-1">
                                     <input type="submit" class="btn btn-danger" value="Delete" />
                                 </form>

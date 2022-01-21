@@ -92,7 +92,7 @@ public class UserEntity extends BaseEntity {
         this.roles = roles;
     }
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     public Set<RecipeEntity> getRecipes() {
         return recipes;
     }

@@ -1,6 +1,6 @@
 package bg.project.foodie.web;
 
-import bg.project.foodie.model.view.AdminPanelUserViewModel;
+import bg.project.foodie.model.view.*;
 import bg.project.foodie.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +29,8 @@ public class AdminController {
 
     @GetMapping("/users")
     public String users(Model model) {
-        List<AdminPanelUserViewModel> adminPanelUserViewModels = userService.findAllUsers();
-        model.addAttribute("users", adminPanelUserViewModels);
+        List<UserViewModel> userViewModels = userService.findAllUsers();
+        model.addAttribute("users", userViewModels);
 
         return "admin-users";
     }

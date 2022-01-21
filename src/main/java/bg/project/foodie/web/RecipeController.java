@@ -3,10 +3,8 @@ package bg.project.foodie.web;
 import bg.project.foodie.model.service.ProductServiceModel;
 import bg.project.foodie.model.service.RecipeServiceModel;
 import bg.project.foodie.model.service.ReviewServiceModel;
-import bg.project.foodie.model.view.RecipeViewModel;
-import bg.project.foodie.model.view.ReviewViewModel;
-import bg.project.foodie.service.RecipeService;
-import bg.project.foodie.service.ReviewService;
+import bg.project.foodie.model.view.*;
+import bg.project.foodie.service.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +23,13 @@ public class RecipeController {
     private final RecipeService recipeService;
     private final ModelMapper modelMapper;
     private final ReviewService reviewService;
+    private final UserService userService;
 
-    public RecipeController(RecipeService recipeService, ModelMapper modelMapper, ReviewService reviewService) {
+    public RecipeController(RecipeService recipeService, ModelMapper modelMapper, ReviewService reviewService, UserService userService) {
         this.recipeService = recipeService;
         this.modelMapper = modelMapper;
         this.reviewService = reviewService;
+        this.userService = userService;
     }
 
     @ModelAttribute
@@ -61,12 +61,16 @@ public class RecipeController {
     }
 
     @GetMapping("/details/{id}")
-    public String details(@PathVariable Long id, Model model) {
+    public String details(@PathVariable Long id, Model model, Principal principal) {
         RecipeViewModel recipeViewModel = recipeService.getRecipeViewById(id);
         List<ReviewViewModel> reviews = reviewService.findAllReviewsById(id);
+        UserViewModel author = recipeViewModel.getAuthor();
+        boolean isAuthorOrAdmin = principal.getName().equals(author.getUsername()) ||
+                userService.isCurrentUserAdmin(principal);
 
         model.addAttribute("reviews", reviews);
         model.addAttribute("recipeViewModel", recipeViewModel);
+        model.addAttribute("isAuthorOrAdmin", isAuthorOrAdmin);
 
         return "recipe-details";
     }

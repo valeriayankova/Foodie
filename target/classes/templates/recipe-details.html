@@ -29,16 +29,20 @@
                         <h3 th:text="*{name}" class="card-title text-center m-3">
                             Recipe name</h3>
 
-                        <div class="card-body d-flex justify-content-center">
-                            <div class="row">
-                                <a th:href="@{/recipes/update/{id}(id=*{id})}" class="btn btn-warning m-1">Modify</a>
+                        <th:block th:if="${isAuthorOrAdmin}">
+                            <div class="card-body d-flex justify-content-center">
+                                <div class="row">
+                                    <a th:href="@{/recipes/update/{id}(id=*{id})}"
+                                       class="btn btn-warning m-1">Modify</a>
 
-                                <form th:action="@{/recipes/delete/{id}(id=*{id})}" th:method="delete" class="m-1">
-                                    <input type="submit" class="btn btn-danger" value="Delete"/>
-                                </form>
+                                    <form th:action="@{/recipes/delete/{id}(id=*{id})}" th:method="delete" class="m-1">
+                                        <input type="submit" class="btn btn-danger" value="Delete"/>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
+                        </th:block>
                     </div>
+
 
                     <div class="recipe card">
                         <img class="card-img-top1" alt="Car image" th:src="*{pictureUrl}">
@@ -71,7 +75,9 @@
                     <h4 class="text-center">Required products: </h4>
                     <div class="d-flex justify-content-center" th:each="p : *{products}">
                         <ul class="p-0">
-                            <li th:object="${p}" th:text="|*{productName} - *{quantity} - *{measurement}|">Product-quantity</li>
+                            <li th:object="${p}" th:text="|*{productName} - *{quantity} - *{measurement}|">
+                                Product-quantity
+                            </li>
                         </ul>
                     </div>
                     <hr>
@@ -145,17 +151,18 @@
                                     <p th:text="*{description}"></p>
 
                                     <th:block sec:authorize="hasRole('ADMIN')">
-                                    <div class="card-body d-flex justify-content-center">
-                                        <div class="row">
+                                        <div class="card-body d-flex justify-content-center">
+                                            <div class="row">
 
-                                            <form th:action="@{/recipes/details/{recipeId}/reviews/delete/{id}
+                                                <form th:action="@{/recipes/details/{recipeId}/reviews/delete/{id}
                                             (recipeId=${recipeViewModel.id},id=${r.id})}"
-                                                  th:method="DELETE" class="m-1">
-                                                <input type="submit" class="btn btn-danger" value="Remove"/>
-                                            </form>
-                                            <a th:href="@{/report/{id}(id=${r.id})}" type="submit" class="btn btn-warning m-1">Report</a>
+                                                      th:method="DELETE" class="m-1">
+                                                    <input type="submit" class="btn btn-danger" value="Remove"/>
+                                                </form>
+                                                <a th:href="@{/report/{id}(id=${r.id})}" type="submit"
+                                                   class="btn btn-warning m-1">Report</a>
+                                            </div>
                                         </div>
-                                    </div>
                                     </th:block>
 
                                 </div>

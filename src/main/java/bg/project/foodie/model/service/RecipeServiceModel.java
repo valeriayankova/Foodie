@@ -101,4 +101,6 @@ public class RecipeServiceModel {
     public void setPicture(MultipartFile picture) {
         this.picture = picture;
     }
+
+
 }

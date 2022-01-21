@@ -1,17 +1,21 @@
 package bg.project.foodie.model.view;
 
+import bg.project.foodie.model.entity.*;
+
 import java.time.LocalDate;
+import java.util.*;
 
 public class UserViewModel {
     private Long id;
     private String username;
-    private String password;
     private String email;
     private String firstName;
     private String lastName;
     private LocalDate created;
     private int countOfRecipes;
     private int countOfReviews;
+    private Set<RoleEntity> roles;
+    boolean isAdmin;
 
     public Long getId() {
         return id;
@@ -27,14 +31,6 @@ public class UserViewModel {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -83,5 +79,21 @@ public class UserViewModel {
 
     public void setCountOfReviews(int countOfReviews) {
         this.countOfReviews = countOfReviews;
+    }
+
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }

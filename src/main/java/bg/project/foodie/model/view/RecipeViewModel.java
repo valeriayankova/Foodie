@@ -15,6 +15,7 @@ public class RecipeViewModel {
     private Integer portions;
     private List<ProductServiceModel> products;
     private String pictureUrl;
+    private UserViewModel author;
 
     public Long getId() {
         return id;
@@ -86,5 +87,13 @@ public class RecipeViewModel {
 
     public void setPictureUrl(String pictureUrl) {
         this.pictureUrl = pictureUrl;
+    }
+
+    public UserViewModel getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(UserViewModel author) {
+        this.author = author;
     }
 }

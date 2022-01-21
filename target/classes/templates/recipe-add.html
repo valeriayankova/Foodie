@@ -25,7 +25,7 @@
                 <form th:action="@{/recipes/add}" th:method="POST" th:object="${recipeServiceModel}" id="recipe-add"
                       class="card-body p-5 text-center" enctype="multipart/form-data">
 
-                    <h2 class="mb-3">Add a new recipe</h2>
+                    <h2 class="mb-3">Update recipe:</h2>
                     <hr>
 
 
@@ -95,14 +95,12 @@
 
 
                             <div class="col-lg-6 mb-3">
-                                <!--                                <label th:for="${product}.name">Name</label>-->
                                 Name
                                 <input th:field="*{products[__${iterStat.index}__].productName}"
                                        id="product" class="form-control form-control-lg"/>
                             </div>
 
                             <div class="col-lg-3 mb-3">
-                                <!--                                <label th:for="${product}.quantity">Quantity(grams)</label>-->
                                 Quantity
                                 <input th:field="*{products[__${iterStat.index}__].quantity}" type="number"
                                        id="quantity" step="0.1" min="0"

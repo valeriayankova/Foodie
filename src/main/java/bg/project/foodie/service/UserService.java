@@ -5,6 +5,7 @@ import bg.project.foodie.model.service.UserServiceModel;
 import bg.project.foodie.model.view.AdminPanelUserViewModel;
 import bg.project.foodie.model.view.UserViewModel;
 
+import java.security.*;
 import java.util.List;
 
 public interface UserService {
@@ -12,7 +13,7 @@ public interface UserService {
 
     boolean registerUser(UserServiceModel userServiceModel);
 
-    List<AdminPanelUserViewModel> findAllUsers();
+    List<UserViewModel> findAllUsers();
 
     void deleteUserById(Long id);
 
@@ -23,4 +24,6 @@ public interface UserService {
     UserEntity findUserByUsername(String name);
 
     UserViewModel getViewByUsername(String name);
+
+    boolean isCurrentUserAdmin(Principal principal);
 }

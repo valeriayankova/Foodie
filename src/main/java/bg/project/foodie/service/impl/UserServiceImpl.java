@@ -4,7 +4,6 @@ import bg.project.foodie.model.entity.RoleEntity;
 import bg.project.foodie.model.entity.UserEntity;
 import bg.project.foodie.model.entity.enums.RoleNameEnum;
 import bg.project.foodie.model.service.UserServiceModel;
-import bg.project.foodie.model.view.AdminPanelUserViewModel;
 import bg.project.foodie.model.view.UserViewModel;
 import bg.project.foodie.repository.UserRepository;
 import bg.project.foodie.service.RoleService;
@@ -17,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.*;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -81,12 +81,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<AdminPanelUserViewModel> findAllUsers() {
+    public List<UserViewModel> findAllUsers() {
         return userRepository.findAll().stream()
                 .map(u -> {
-                    AdminPanelUserViewModel view = modelMapper.map(u, AdminPanelUserViewModel.class);
+                    UserViewModel view = modelMapper.map(u, UserViewModel.class);
                     if (u.getRoles().stream().anyMatch(r -> r.getName().equals(RoleNameEnum.ADMIN))) {
                         view.setAdmin(true);
+                        view.setCountOfRecipes(u.getRecipes().size());
+                        view.setCountOfReviews(u.getReviews().size());
                     }
 
                     return view;
@@ -133,6 +135,13 @@ public class UserServiceImpl implements UserService {
             return modelMapper.map(userEntity, UserViewModel.class);
         }
         return null;
+    }
+
+    @Override
+    public boolean isCurrentUserAdmin(Principal principal) {
+        UserEntity userEntity = userRepository.findByUsername(principal.getName()).orElse(null);
+        assert userEntity != null;
+        return userEntity.getRoles().stream().anyMatch(r -> r.getName().equals(RoleNameEnum.ADMIN));
     }
 
 }

@@ -3,7 +3,7 @@ package bg.project.foodie.service.impl;
 import bg.project.foodie.cloudinary.*;
 import bg.project.foodie.model.entity.*;
 import bg.project.foodie.model.service.*;
-import bg.project.foodie.model.view.RecipeViewModel;
+import bg.project.foodie.model.view.*;
 import bg.project.foodie.repository.ProductRepository;
 import bg.project.foodie.repository.RecipeRepository;
 import bg.project.foodie.service.CategoryService;
@@ -25,7 +25,6 @@ public class RecipeServiceImpl implements RecipeService {
     private final ModelMapper modelMapper;
     private final UserService userService;
     private final CategoryService categoryService;
-    private final ProductRepository productRepository;
     private final CloudinaryService cloudinaryService;
 
     public RecipeServiceImpl(RecipeRepository recipeRepository, ModelMapper modelMapper, UserService userService, CategoryService categoryService, ProductRepository productRepository, CloudinaryService cloudinaryService) {
@@ -33,7 +32,6 @@ public class RecipeServiceImpl implements RecipeService {
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.categoryService = categoryService;
-        this.productRepository = productRepository;
         this.cloudinaryService = cloudinaryService;
     }
 

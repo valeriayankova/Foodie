@@ -11,6 +11,7 @@ import bg.project.foodie.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.*;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,6 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
     public void deleteReview(Long id) {
         reviewRepository.deleteById(id);
     }

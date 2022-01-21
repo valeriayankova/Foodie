@@ -37,6 +37,8 @@ public class RecipeController {
         return new ReviewServiceModel();
     }
 
+
+
     @GetMapping(value = {"", "/{category}"})
     public String recipes(@PathVariable(required = false) String category, Model model) {
         if (category != null) {
@@ -63,11 +65,14 @@ public class RecipeController {
     public String details(@PathVariable Long id, Model model, Principal principal) {
         RecipeViewModel recipeViewModel = recipeService.getRecipeViewById(id);
         List<ReviewViewModel> reviews = reviewService.findAllReviewsById(id);
+        UserViewModel author = recipeViewModel.getAuthor();
+        boolean isAuthor = principal.getName().equals(author.getUsername());
         boolean isAdmin = userService.isCurrentUserAdmin(principal);
 
         model.addAttribute("reviews", reviews);
         model.addAttribute("recipeViewModel", recipeViewModel);
         model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isAuthor", isAuthor);
 
         return "recipe-details";
     }

@@ -94,7 +94,8 @@ public class RecipeServiceImpl implements RecipeService {
         updatedRecipe.setCategory(categoryService.findByName(serviceModel.getCategory()));
         RecipeEntity recipe = recipeRepository.findById(updatedRecipe.getId()).orElse(null);
         assert recipe != null;
-        if (!recipe.getAuthor().getUsername().equals(principal.getName())) {
+        UserEntity author = recipe.getAuthor();
+        if (!author.getUsername().equals(principal.getName()) && !userService.isCurrentUserAdmin(principal) ) {
             return false;
         }
         updateEntity(updatedRecipe, recipe);

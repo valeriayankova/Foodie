@@ -101,7 +101,7 @@ public class UserEntity extends BaseEntity {
         this.recipes = recipes;
     }
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     public Set<ReviewEntity> getReviews() {
         return reviews;
     }

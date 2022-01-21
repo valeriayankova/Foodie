@@ -47,8 +47,7 @@
                             <td>
                                 <select class="form-select" name="select-role" id="select-role">
                                     <option th:each="r : ${T(bg.project.foodie.model.entity.enums.RoleNameEnum).values()}"
-                                    th:text="${r.name()}" th:value="${r.name()}"
-                                    th:selected=""></option>
+                                    th:text="${r.name()}" th:value="${r.name()}"></option>
                                 </select>
                             </td>
 

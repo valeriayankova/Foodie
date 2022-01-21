@@ -55,8 +55,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    @Transactional
     public void deleteReview(Long id) {
-        reviewRepository.deleteById(id);
+        ReviewEntity reviewEntity = reviewRepository.findById(id).orElse(null);
+        assert reviewEntity != null;
+        reviewEntity.setRecipe(null);
+        reviewRepository.delete(reviewEntity);
     }
 }

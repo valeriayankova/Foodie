@@ -120,7 +120,7 @@ public class RecipeEntity extends BaseEntity {
         return this;
     }
 
-    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<ReviewEntity> getReviews() {
         return reviews;
     }

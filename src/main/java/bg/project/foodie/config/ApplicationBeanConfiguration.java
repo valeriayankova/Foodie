@@ -5,11 +5,13 @@ import org.modelmapper.*;
 import org.modelmapper.spi.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.web.multipart.*;
 
 import java.io.*;
+import java.security.*;
 import java.util.*;
 
 @Configuration
@@ -27,7 +29,7 @@ public class ApplicationBeanConfiguration {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new Pbkdf2PasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
     @Bean

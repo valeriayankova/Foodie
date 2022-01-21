@@ -63,13 +63,10 @@ public class RecipeController {
     public String details(@PathVariable Long id, Model model, Principal principal) {
         RecipeViewModel recipeViewModel = recipeService.getRecipeViewById(id);
         List<ReviewViewModel> reviews = reviewService.findAllReviewsById(id);
-        UserViewModel author = recipeViewModel.getAuthor();
-        boolean isAuthor = principal.getName().equals(author.getUsername());
         boolean isAdmin = userService.isCurrentUserAdmin(principal);
 
         model.addAttribute("reviews", reviews);
         model.addAttribute("recipeViewModel", recipeViewModel);
-        model.addAttribute("isAuthor", isAuthor);
         model.addAttribute("isAdmin", isAdmin);
 
         return "recipe-details";

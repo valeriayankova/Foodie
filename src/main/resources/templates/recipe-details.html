@@ -150,20 +150,20 @@
 
                                     <p th:text="*{description}"></p>
 
-                                    <th:block sec:authorize="hasRole('ADMIN')">
                                         <div class="card-body d-flex justify-content-center">
                                             <div class="row">
 
-                                                <form th:action="@{/recipes/details/{recipeId}/reviews/delete/{id}
-                                            (recipeId=${recipeViewModel.id},id=${r.id})}"
+                                                <form th:if="(${#authentication.name} == ${r.username}) or ${isAdmin}"
+                                                      th:action="@{/recipes/details/{recipeId}/reviews/delete/{id}
+                                                      (recipeId=${recipeViewModel.id},id=${r.id})}"
                                                       th:method="DELETE" class="m-1">
                                                     <input type="submit" class="btn btn-danger" value="Remove"/>
                                                 </form>
-                                                <a th:href="@{/report/{id}(id=${r.id})}" type="submit"
+                                                <a th:unless="${#authentication.name} == ${r.username}"
+                                                   th:href="@{/report/{id}(id=${r.id})}" type="submit"
                                                    class="btn btn-warning m-1">Report</a>
                                             </div>
                                         </div>
-                                    </th:block>
 
                                 </div>
 

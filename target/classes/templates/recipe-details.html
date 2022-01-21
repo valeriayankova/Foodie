@@ -29,7 +29,7 @@
                         <h3 th:text="*{name}" class="card-title text-center m-3">
                             Recipe name</h3>
 
-                        <th:block th:if="${isAuthorOrAdmin}">
+                        <th:block th:if="${isAuthor} or ${isAdmin}">
                             <div class="card-body d-flex justify-content-center">
                                 <div class="row">
                                     <a th:href="@{/recipes/update/{id}(id=*{id})}"
@@ -100,7 +100,7 @@
 
                     <hr>
 
-                    <div class="text-center">
+                    <div class="text-center" th:unless="${isAuthor}">
                         <h4> Write a review for this recipe</h4>
 
                         <form th:action="@{/recipes/details/{id}/review/add(id=${recipeViewModel.id})}"
